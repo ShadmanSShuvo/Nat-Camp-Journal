@@ -1,0 +1,197 @@
+\chapter{Quadratic Residue and Diophantine Equation}% by Atonu Roy Chowdhry}
+\begin{linkb}
+   \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=YeurXbh2sIQ}{Video 1} + \href{https://www.youtube.com/watch?v=3ZBGv6dH37o}{Video 2}
+        \item \href{https://drive.google.com/file/d/1lHBgt42uKI6qc0-Yt_Sx7boahxsYLVN7/view}{An Intro ...(book)}, \href{https://drive.google.com/file/d/12nate-JVlXwJUkMS7ja6ftBvyTWatace/view?usp=sharing}{Class note}
+        
+        \item \href{https://drive.google.com/file/d/16tC_XxRU31j_iOVZ3gEb_BMcZlQBfIP7/view?usp=sharing}{Note + P Set}
+   \end{itemize}
+\end{linkb}
+\section{Quadratic Residue}
+
+(Note: here \textit{qr} means quadratic residue)
+
+\begin{definition}[Quadratic Residue]
+$a$ is called quadratic residue modulo $n$ if $\exists x: x\equiv a \pmod n$. 
+\end{definition}
+
+\begin{definition}[Quadratic Residue Class]
+$qr(n)=\{a:a \mathrm{is \ a \ qr \ in \ mod} n \}$.
+\end{definition}
+As an example $qr(5)=\{0,1,4\}$.
+
+\begin{theorem}
+If $-1$ is a qr in mod $p$ where $p$ is an odd prime. Then, $ p \equiv 1 \pmod 4$.
+\end{theorem}
+
+AFTSOC, $p\equiv -1 \pmod 4$ or $p = 4k-1$.
+So $\exists x : x^2\equiv -1 \pmod p$. 
+\[x^{p-1}\equiv 1 \pmod p \ \mathrm{By FLT}\]
+\[\implies x^{4k-2}\equiv 1\pmod p\]
+\[\implies (x^2)^{2k-1}\equiv 1 \pmod p\]
+\[\implies (-1)^{2k-1}\equiv 1 \pmod p\]
+\[-1\equiv 1 \pmod p\]
+which is absurd.
+
+The converse of the above theorem is also true.
+\begin{theorem}
+If $ p \equiv 1 \pmod 4$ is a prime then -1 is a quadratic residue mod $p$
+\end{theorem}
+The proof is constructive\ldots
+
+
+\section{Legendre's Formula}
+\begin{definition}[Legendre Symbol]
+\[\left(\frac{n}{p}\right)=\begin{cases}
+				0 & p\mid n \\
+				1 & n\in qr(p) \\
+				-1 & n\not\in qr(p)
+				\end{cases}
+				\]
+\end{definition}
+
+\begin{theorem}
+\[a^{\frac{p-1}{2}}\equiv \left(\frac{a}{p}\right) \pmod p \]
+\end{theorem}
+
+
+\begin{lemma}
+\[\left(\frac{ab}{p}\right)=\left(\frac{a}{p}\right)\left(\frac{b}{p}\right)\]
+\end{lemma}
+The meaning of the above lemma is if $a,b$ are both qr then $ab$ is also qr.
+
+If $a,b$ both are not qr then $ab$ is a qr.
+
+But, if only one of them is qr, then, $ab$ is not qr.
+
+\begin{lemma}
+\[\left(\frac{-1}{p}\right)=\begin{cases}
+			-1 & p=4k+1 \\
+			1 & p=4k-1
+			\end{cases}
+			\]
+\end{lemma}
+
+\begin{lemma}
+\[\left(\frac{2}{p}\right)=(-1)^{\frac{p-1}{8}}\]
+\end{lemma}
+
+
+\begin{lemma}
+\[\left(\frac{p}{q}\right)\left(\frac{q}{p}\right)=(-1)^{\frac{p-1}{2}}\cdot (-1)^{\frac{q-1}{2}}\]
+\end{lemma}
+\textbf{Techniques:}
+Whenever you see squares you should take moulo $2^n$.
+
+\section{Diophantine Equation}
+Here we are going to solve some diophantine equation problems (i.e. problems asking for integer solutions)
+\begin{example}
+$d\neq 2,5,13$, $S=\{2,5,13,d\}$. Prove that, $\exists a,b \in S$ such that $ab-1 \neq k^2$
+\end{example}
+Here you have to show that there is no such $d$ that satisfies all the equations:
+\begin{align*}
+2d-1 &=x^2 \\
+5d-1 &=y^2 \\
+13d-1 &=z^2 
+\end{align*}
+
+AFTSOC, exists such $d$.  
+First take mod $4$,
+
+$qr(4)=\{0,1\}$
+
+So, $2d-1 \pmod 4 \in \{0,1\}.$ Here, $2d-1$ doesn't congruent to 0 modulo $4$ as it is odd.
+
+So, $2d-1 \equiv 1 \pmod 4 \implies d\equiv 1 \pmod 2$
+
+But, then mod $4$ and mod $8$ aren't useful. Then take mod 16. Then some exercise left for the readers.
+
+
+%\paragraph{What if power $\ge 2$?}
+\begin{example}
+Find all solutions to the equation:
+\[x^3 + y^4 =7\]
+\end{example}
+Here we need to find a prime $p$ such that $3|p-1$ and $4|p-1$. 
+$p=13 $ is a good choice.
+
+So we work with mod $13$. We get:
+$x^3 \pmod {13} =\{0,1,5,8,12\}$ and $y^4 \pmod {13} = \{0,1,3,9\}$.
+
+But no such summation of two elements from the sets is equal to $7$. So, there is n such solution.
+
+\begin{example}
+Find all solutions to the equation:
+$$x^5-y^2=4$$
+\end{example}
+Here the magical mod is $11$.
+We get $x^5 \pmod {11} =\{0,1,-1\}$. And $y^2=x^5-4 \pmod {11} =\{6,7,9\}$
+
+But quadratic residue $\pmod {11} =\{0,1,4,9,5,3\}$.
+
+So, there is no such solution.
+
+\section{Practise Problems}
+
+\begin{problem}
+
+
+	\begin{hint}
+	\addhint{}
+	\addhint{}
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+
+
+	\begin{hint}
+	\addhint{}
+	\addhint{}
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+
+
+	\begin{hint}
+	\addhint{}
+	\addhint{}
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+
+
+	\begin{hint}
+	\addhint{}
+	\addhint{}
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+
+
+	\begin{hint}
+	\addhint{}
+	\addhint{}
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+
+
+	\begin{hint}
+	\addhint{}
+	\addhint{}
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+
+
+	\begin{hint}
+	\addhint{}
+	\addhint{}
+	\end{hint}
+\end{problem}

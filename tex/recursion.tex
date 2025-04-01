@@ -1,0 +1,33 @@
+\chapter{Recursion}% by Mursalin Habib}
+
+\begin{linkb}
+   \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=Jh8VFmv5_s4}{Solving Recurrence }
+        %\item 
+   \end{itemize}
+\end{linkb}
+%\section{solving Recurrences}
+\section{Definitions}
+A \textbf{Recurrence} sequence is a type of sequence where the following terms of the sequence depends on the previous terms of the sequence.
+
+$$A_n=A_{n-1}+A_{n-2}-3A_{n-3}$$ is a recurrence relation where every term depends on it previous three terms.
+
+A \textbf{linearly recurrence sequence} is a recurrence where the relation with the following term and the previous terms is linear(or has a power of 1). The previously mentioned recurrence sequence is a linear recurrence sequence.
+
+The common structure of a \textbf{homogeneous linearly recurrence sequence} is $$T_n=C_1T_{n-1}+C_2T_{n-2}+C_3T_{n-3}+...+C_{k-1}T_{n-k+1}+C_kT_{n-k}$$, where $k$ is a positive integer less than $n$ and greater than $0$.
+
+\section{Solving Recurrence}
+\begin{example}
+Solve the recurrence $$T_n=5T_{n-1}-6T_{n-2}$$
+\end{example}
+$$T_n=C_1T_{n-1}+C_2T_{n-2}+C_3T_{n-3}+...+C_{k-1}T_{n-k+1}+C_kT_{n-k}$$ here, the \textbf{order} of this recurrence is $k$.
+
+So, in our following problem, the order is 2.
+
+To, solve the recurrence, first we have the find the \textbf{characteristic polynomial} of the recurrence.
+
+The characteristic polynomial of $$T_n=C_1T_{n-1}+C_2T_{n-2}+C_3T_{n-3}+...+C_{k-1}T_{n-k+1}+C_kT_{n-k}$$ would be $$x^k-c_1x^{k-1}-c_2x^{k-2}-....-c_kx^{0}=0$$
+%\section{Example Problems}
+
+
+\section{Practise Problems}

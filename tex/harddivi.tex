@@ -1,0 +1,140 @@
+\chapter{Harder Divisibility}% by Atonu Roy Chowdhury}
+\begin{linkb}
+   \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=kf_0msAOTMc}{Harder Divisibility(Atonu)} 
+        \item \href{https://drive.google.com/file/d/1ZURQO2KSR9aaeaVyalL7GNuVBYhOGswB/view?usp=sharing}{1} , 
+			\href{https://drive.google.com/file/d/1QHrhEnmAzimZjt-8k_T8AJrX3KiRSm73/view?usp=sharing}{2} 
+   \end{itemize}
+\end{linkb}
+
+%\textbf{Prerequisities:}
+\subsection*{Prerequisities:}
+\begin{enumerate}
+	\ii Residue System
+	\ii Reduced Residue System
+	\ii Fermat's Little Theorem(FLT: $a^{p-1}\equiv 1 \pmod p$ where $(a,p)=1$) and Euler's Theorem($a^{\varphi (m)}\equiv 1 \pmod m$ where $(a,m)=1$ and $m$ is not necessarily prime). 
+	\ii Wilson's Theorem($p$ prime $\Leftrightarrow (p-1)! \equiv -1 \pmod p$)
+\end{enumerate}
+All of these topics are covered in Basic Divisibility Class: \autoref{sec:divi}.
+
+\section{Order}
+By Fermat's Little Theorem and Euler's Totient Function, 
+$$a^{\varphi (m)}\equiv 1 \pmod m$$
+If we are going to calculate
+$a^1, a^2, a^3, \ldots, a^{\varphi (m)} \pmod m$ we find that, $a^n \equiv 1 \pmod m$ where $m< \varphi(m)$.
+
+As an example $2^3 \equiv 1 \pmod 7$ but $2^{\varphi (7)} \equiv 2^6 \equiv 1 \pmod 7$
+
+Here we find that $3$ is more special than $6$ in our example. Actually $3$ is order of $2$ modulo $7$.
+Which is denoted by $\ord_{7}(2)=3$.
+
+\begin{definition}[Order]
+$\ord_{m}(a)=\min \{x:a^x\equiv 1 \pmod m \}$
+\end{definition}
+here a point to be noted that $\gcd (a,m)=1$.
+If they aren't co-prime then no power of $a$ wil be $1$ modulo $m$.
+Which is left as an exercise for the readers.
+
+\begin{theorem}[Fundamental Theorem of Orders]
+$\ord_m(a)=d$ then, $d|N \Leftrightarrow a^N \equiv 1 \pmod m$.
+\end{theorem}
+Let assume $N=dk$ and we know $a^d\equiv 1 \pmod m$ then, we have $a^{dk} \equiv 1 \pmod m$.
+
+Assume for the sake of contradiction $d\not\mid N \implies N=dq+r $ such that $0<r<d$.
+ Now, $a^d\equiv 1 \pmod m$. as $d$ is the order.
+ Then we have $a^{dq}\equiv 1 \pmod m \implies a^N = a^{dq+r}\equiv 1 \cdot a^r \pmod m$
+ \[\implies a^r \equiv 1  \pmod m \]
+ which is a contradiction as $r$ can't be the order as $r<d$.
+
+Here, we learn:
+\begin{enumerate}
+	\ii $d\mid \varphi_(m)$ which means $d\in \{ \mathrm{divisors of \varphi_(m)}\}$
+	\ii $a^x\equiv a^y \pmod m \Leftrightarrow x\equiv y \pmod d$ where $\gcd(m,n) =1$.
+	WLOG, $x\ge y$ so, $a^{x-y} \equiv 1 \pmod m$ then, $d\mid x-y $ and then we get $x\equiv y \pmod d$.
+
+\end{enumerate}
+
+\begin{example}
+Given that $\gcd (a,m)=1$. Prove that $n\mid \varphi (a^n-1)$.
+\end{example}
+Let, $N=a^n-1$, so, $n\mid \varphi (N)$ and $\ord_N(a)\mid \varphi(N)$
+
+So, we have to show that $a^n\equiv 1 \pmod N$
+
+Assume for the sake of contradiction that, $k<n$ then we have, $a^k\equiv 1 \pmod N \implies N\mid a^k-1$
+
+But, which means, $a^k-1 \ge N= a^n-1$
+
+Contradiction as we assumed that $k<n$.
+
+\begin{example}
+Find all $n$ $n\mid 2^n-1$.
+\end{example}
+Here we find that $n$ must be odd and $n=1$ works. 
+We let $n=2k+1$, so, $2k+1 \mid 2^{2k+1} -1$ 
+
+Here we will use a lemma.
+\begin{lemma}
+If $a^x \equiv 1, a^y \equiv 1 $ all are taken modulo $m$. Then we have $a^{\gcd (x,y)} \equiv 1 \pmod m$
+\end{lemma}
+
+Let, $p$ be the smallest prime factor of $n$ (this trick is called the smallest prime factor(spf trick) of $n$)
+
+$d=\ord_p(2)\implies d\mid \varphi(p)=p-1$
+By FLT, $p\mid n \mid 2^n-1 \implies 2^n \equiv 1 \pmod p \implies d\mid n$ .
+
+But then, 
+\[ d\mid p-1, \ \ \ d\mid n \]
+which is a contradiction! 
+\section{Primitive Root}
+\begin{definition}
+Let $g$ is a positive integer and $\gcd(g,n)=1$. Then we shall call $g$ "Primitive Root modulo $m$" if $\ord_m(g)=\varphi(m)$.
+\end{definition}
+As an example, $\gcd(3,7)=1$, $3^6 \equiv 1 \pmod 7$.
+We also know that $\varphi(7)=6$.
+So, we can say that $3$ is a primitive root modulo $7$.
+
+\begin{theorem}[Primitive Root]
+Let, $p$ be a prime. Then $\exists g \in \{ 1,  \ldots, p-1 \}$ such that $g$ is a primitive root modulo $p$.
+\end{theorem}
+\begin{remark}
+$\{1,\ldots, p-1\}$ is the reduced residue system of $p$ denoted by $RRS(p)$.
+\end{remark}
+
+\textbf{Usage and Properties of Primitive Root:}
+
+%\begin{enumerate}
+%	\ii
+\begin{prop}
+If $g$ is a primitive root modulo $m$ and $\varphi(m)$ is even then,$g^{\varphi(m)/2}\equiv -1 \pmod m$.
+\end{prop}
+
+Let, $\varphi(m)=2n$ So we have, \[g^{2n}\equiv 1 \pmod m \implies m\mid g^{2n}-1=(g^n+1)(g^n-1)\]
+Which means, $m\mid g^n+1 $ or $m\mid g^n-1$.
+So we have, $g^n\equiv -1$ or $g^n\equiv +1$ modulo $m$.
+
+Now, AFTSOC (Assume for the sake of contradiction) that 
+$g^n \equiv 1 \pmod m$
+Then, $\varphi(m)=\ord_m(g)\le n$
+
+But now we get $2n\le n$ which is absurd.
+
+\begin{prop}
+$S=\{ g, g^2, g^3, \ldots, g^{\varphi(m)} \}$ is $RRS(m)$ where $g$ is primitive root modulo $m$.
+\end{prop}
+
+%proof goes here
+
+
+
+\section{Wilson's Theorem}
+
+\begin{theorem}[Wilson's Theorem]
+If $p$ is a prime then $(p-1)!\equiv -1 \pmod p$.
+\end{theorem}
+You can find a proof from Brilliant.org
+
+\begin{problem}
+Let $p$ be an odd prime. Find all $k$ such that \[p\mid 1^k + 2^k + 3^k +\ldots + (p-1)^k\]
+\end{problem}
+Here solving the above problem, you assume that you don't know any formula.

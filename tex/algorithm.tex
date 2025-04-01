@@ -1,0 +1,78 @@
+\chapter{Algorithms}% by Ahsan Al Mahir}
+
+\begin{linkb}
+   \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=VjXhzp-hYoE}{Algorithms (Lazim)} 
+        \item \href{https://drive.google.com/file/d/1p0i6hqSbMrBuEjdoiQCPlfXQlBMAtMJ3/view}{Class}, \href{https://drive.google.com/file/d/1KeTtY-0IxhPWDcDFvvau15P9_OEyCuq_/view}{Note}
+   \end{itemize}
+\end{linkb}
+
+(We followed the note \textit{Algorithms} by Cody Johnson from France IMO Training Camp 2015. This note is a great resource for further reading.)
+An algorithm is a set of steps to perform a procedure.
+
+You may know the \textbf{Binary Search Algorithm}.(the number guessing game is a game
+in which your opponent thinks of a integer $n$ on an interval $[a, b]$, and you try to guess his number with the
+rule that after every guess he must tell you if your guess was correct, too high, or too low. you can win this game by at most $\log_2(b-a+1)$ guesses.)
+
+\section{Greedy Algorithms}
+The greedy algorithm is an algorithm that chooses the optimal choice in the short run.
+It arises naturally. 
+You can solve many of the problems appear in various olympiads by greedy-approch.
+
+
+\begin{example}[Binary Number System]
+Prove that every positive integer can be written uniquely as
+the sum of one or more distinct powers of $2$.
+\end{example}
+Here, we take the highest power of $2$ (say $m$) less than or equal to the integer $n$. Then, apply the algorithm to the number $(n-m)$.
+And consequntly we are done! (by strong induction)
+
+
+\begin{example}[Zeckendorf's Theorem]
+Prove that every positive integer can be written uniquely as
+the sum of one or more Fibonacci numbers, no two of which are consecutive Fibonacci numbers.
+\end{example}
+Here, work similarly a sthe above example, lsrgest power of $2$ replaced by the largest Fibonacci number less than or equal to $n$.
+
+
+Here, we comes to a graph coloring problem. 
+Algorithms are hugely applied in graph 
+theoretic problems especially in graph coloring.
+
+\begin{example}
+Let $\Delta$ be the maximum degree of the vertices of a given graph. Devise a method to
+color this graph using at most $\Delta + 1$ colors such that no two neighboring vertices are of the same color.
+\end{example}
+We shall use the following greedy algorithm: for each vertex, we shall color it with any color that has
+not been used by any of its neighbors. Since each vertex has at most $\Delta$ neighbors, at least one of the $\Delta + 1$
+colors has not been used, so such a color will always exist. Thus, we are done.
+
+
+
+\section{Reduction Algorithms}
+Algorithms can be used to reduce a complex configuration to a simple one while preserving its combinatorial
+function in the problem.
+\begin{example}[Cody Johnson]
+Consider an ordered set $S$ of $6$ integers. A move is defined by the
+following rule: for each element of $S$, add either $1$ or $-1$ to it. Show that there exists a finite sequence
+of moves such that the elements of the resulting set, $S' = (n_1 , n_2 , \ldots , n_6)$, satisfy $n_1 n_5 n_6 = n_2 n_4 n_6 =
+n_3 n_4 n_5$.
+\end{example}
+Here show that, we can reduce all the elements to noly $0$ and $1$. Now it is easy to tackle the problem. Then you can assume for the sake of contradiction that the products are not equal. After this some case works solve the problem.
+
+
+
+\begin{example}[Canada MO]
+Let $n\times n$ be grid of squares. Their is some barricades such that none of the squares are isolated. There is two robots arbitrarily placed on two square. You can perform up, down, left, right commands to control the robots but it is simutaneous. Prove that it is possible to take 2 robots at the lower left corner of the grid. 
+\end{example}
+
+Here are two ideas to solve it.
+
+First one is to take the robot which is furthest from the lower left square, then take it to the rquired square. And then the other.
+
+Another approach is to show that, we can restrict (or take) two robots at a single square sometime. Then we are done by giving the commands U,R,L,D.
+
+\section{Invariant and Monovariant}
+See \nameref{sec:inv-mono}. This class covered invariants and mnonovariants.
+
+

@@ -1,0 +1,144 @@
+\chapter{Double Counting and PIE}% by Nishat Anjum Bristy}
+
+\begin{linkb}
+   \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=-XuswFtIiRY}{1} + \href{https://www.youtube.com/watch?v=UkvhVQ1_QEo}{2}
+        \item \href{https://drive.google.com/file/d/1D-E7FSLqfIj8gYf0Dmg94uEr8pROjN-e/view}{1} , \href{https://drive.google.com/file/d/16tu7PZ_95BnBYSLIJarznwacp3deTxRF/view}{2}
+        \item \href{https://drive.google.com/file/d/1FQlCRhMpyAYWvRIxWtAJGNN7kuQA3k_6/view}{P set}
+   \end{itemize}
+\end{linkb}
+
+\section{Double Counting}
+Double counting is also known as counting in two ways. By this technique, we count something in two ways!
+
+Here is our first example:
+\begin{example}
+Show that, \[1+2+3+\ldots +n=\frac{n(n+1)}{2}\]
+\end{example}
+You can easily solve this by induction. but here we present a solution with double counting.
+
+By writing the left side as $S_n$ we proceed as follows:
+\[S_n = 1+2+\ldots +n\]
+\[S_n = n+(n-1)+\ldots+1\]
+Thus, \[S_n=\frac{n(n+1)}{2}.\]
+
+But now, we want to think the right side of 
+the equation in combinatorial arguments. 
+Here we see that the right side is equal to 
+the number of ways to choose $2$ things from 
+$n+1$ given things. If we can establish a 
+bijection between them then we are done!
+
+Here we take two empty cells, and we want to place the numbers in the cells. 
+Suppose the cells:
+\[\boxed{i} \boxed{j}\]
+such that, $i<j$. 
+Now if we place $i=1$ then we see that, there are $n$ choice for $j$. By similar arguments, we calculate, 
+\[\binom{n+1}{2}=1+2+3+\ldots+n.\]
+
+
+
+\begin{example}
+In a given series th esum of any $7$ consecutive number is negative and the sum of any $11$ consecutive numbers is positive.
+Prove that the series can't have $17$ terms.
+\end{example}
+
+
+Here we make a matrix of the numbers of the series by writing consecutive terms.
+%\begin{center}
+%\begin{align*}
+%t_1 &t_2 &t_3 &\ldots &t_{11}\\
+%t_2 &t_3 &t_4 &\ldots &t_{12}\\
+%\ldots &\ldots &\ldots &\ldots &\ldots \\
+%\ldots &\ldots &\ldots &\ldots &\ldots \\
+%t_7 &t_8 &t_9 &\ldots &t_{17}
+%\end{align*} 
+%\end{center}
+%\begin{tabular}
+%$t_1$ &$t_2$ &$t_3$ &$\ldots$ &$t_{11}$\\
+%$t_2$ &$t_3$ &$t_4$ &$\ldots$ &$t_{12}$\\
+%$\ldots$ &$\ldots$ &$\ldots$ &$\ldots$ &$\ldots$ \\
+%$\ldots$ &$\ldots$ &$\ldots$ &$\ldots$ &$\ldots$ \\
+%$t_7$ &$t_8$ &$t_9$ &$\ldots$ &$t_{17}$
+%\end{tabular} 
+
+%\begin{center}
+%\begin{array}{cc}
+%\hline
+%t_1 & t_2 &t_3 &\ldots &t_{11}\\
+%\hline
+%t_2 & t_3 &t_4 &\ldots &t_{12}\\
+%\hline
+%\ldots &\ldots &\ldots &\ldots &\ldots \\
+%\hline
+%\ldots &\ldots &\ldots &\ldots &\ldots \\
+%\hline
+%t_7 &t_8 &t_9 &\ldots &t_{17}\\
+%\hline
+%\end{array} 
+%\end{center}
+
+%\begin{array}
+%$t_1$ &$t_2$ &$t_3$ &$\ldots$ &$t_{11}$\\
+%\hline
+%$t_2$ &$t_3$ &$t_4$ &$\ldots$ &$t_{12}$\\
+%\hline
+%$\ldots$ &$\ldots$ &$\ldots$ &$\ldots$ &$\ldots$ \\
+%\hline
+%$\ldots$ &$\ldots$ &$\ldots$ &$\ldots$ &$\ldots$ \\
+%\hline
+%$t_7$ &$t_8$ &$t_9$ &$\ldots$ &$t_{17}$
+%\end{array} 
+\begin{center}
+\[
+\begin{matrix}
+t_1 & t_2 & t_3 & \ldots & t_{11}\\
+t_2 & t_3 & t_4 & \ldots & t_{12}\\
+\ldots & \ldots & \ldots & \ldots & \ldots \\
+\ldots & \ldots & \ldots & \ldots & \ldots \\
+t_7 & t_8 & t_9 & \ldots & t_{17}
+\end{matrix} 
+\]
+\end{center}
+Then sum up all the rorws and all the columns. See that, the rows sum up to a positive number but the columns sum up to a negative number.
+Which is a contardiction!
+\begin{remark*}
+In the above example, we used the Fubini's Principle.
+\end{remark*}
+\begin{example}
+Determine the total number of fixed points in all the permutations of \[ \{1, 2, 3, \ldots , n\}\]
+\end{example}
+Here observing with smaller $n$ you can find the answer. It is just $n!$.
+
+Try to make a table here. You probably find that, in each column there is $(n-1)!$ number of fixed points.
+So the total is $n(n-1)!=n!$.
+
+
+
+%\begin{example}
+%\ldots
+%\end{example}
+
+
+%\begin{example}
+%There is a set $S=\{1,2,3,\ldots, mn\}$ and another set $T$ such that, $|T|=2n$ and each element of $T$ is a $m$ element subset of $S$.
+%In every two elemnts of $T$ there is at most one common element.
+%And, every element of $S$ lies exactly in two %element
+% of $T$. 
+% Prove that, $m\le 2n-1$.
+%\end{example}
+%\section{}
+%\ldots
+\section{Principle of Inclusion-Exclusion}
+$A,B$ are two set and we know that $|a\cup B|=|A|+|B|-|A\cap B|$. This called inclusion exclusion pirinciple.
+
+For three sets $A,B,C$ we have \[|A\cup B \cup C| = |A| + |B| + |C| -|A\cap B| - |B\cap C| - |C\cap  A| + |A\cap B\cap C|\]
+
+For larger number of sets we have: 
+\[| A_1 \cup A_2  \cup \ldots A_n |=|A_1| + |A_2| + \ldots +|A_n| -|A_1 \cap A_2| - |A_2 \cap A_3| - \ldots  -|A_{n-1} \cap A_n| + |A_1 \cap A_2 \cap A_3| + \ldots + \ldots  \]
+So positive for evens and negative for odds.
+
+The above identity can be written as 
+\[|A_1 \cup A_2 \cup \ldots \cup A_n = \sum_{k=1}^n \sum_{a_i \neq a_j} (-1)^{k+1} |S_{a_1}\cap \ldots \cap S_{a_k} \]
+
+In problem solving it is also an useful trick!

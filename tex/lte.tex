@@ -1,0 +1,65 @@
+\chapter{Lifting The Exponent (LTE) Lemma}% by Tanmoy Sarkar}
+\begin{linkb}
+   \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=D7Pt_mROJcw}{Lifting The Exponent (Tanmoy)}
+        \item \href{https://drive.google.com/file/d/1en-kqZcoNRirudjEO_iTA67T6MgCBGPi/view}{LTE} 
+   \end{itemize}
+\end{linkb}
+\section{Definitions and the Lemma}
+
+We previously discussed about the p-adic valuation function $\upsilon_p(m)$ of a positive integer $m$ for which $\upsilon_p(m)$ is the highest power of a integer $p$ that divides  $m$
+
+\begin{lemma}
+ For $x,y \in \mathbb{Z}$ and  $n \in \mathbb{N}$, let $P$ be a odd prime number such that $(n,p)=1$ , $p\nmid x, y$ but $p|x-y$, then $$\upsilon_(x^n-y^n)=\upsilon_(x-y)$$
+\end{lemma}
+
+\textbf{Proof:} Given that $$x-y \equiv  0 \pmod p$$ $$\implies x \equiv y \pmod p$$ $$\implies x^{n-1} \equiv y^{n-1} \pmod p$$ $$\implies x^{n-2}y \equiv y^{n-1} \pmod p$$  $$\implies x^{n-3}y^2 \equiv y^{n-1} \pmod p$$ and so  goes on.
+
+But $$x^n-y^n=(x-y)(x^{n-1}+ x^{n-2}y+x^{n-3}y^2+.....+xy^{n-2}+y^{n-1})$$
+$$x^n-y^n=(x-y)(ny^{n-1}) \pmod p$$
+But as $p \nmid n, y$, so,  $\upsilon_(x^n-y^n)=\upsilon_(x-y)$ 
+
+\begin{lemma}
+ For $x,y \in \mathbb{Z}$ and  $n \in \mathbb{N}$ and $n$ even, let $P$ be a odd prime number such that $(n,p)=1$ , $p\nmid x, y$ but $p|x+y$, then $$\upsilon_(x^n+y^n)=\upsilon_(x+y)$$
+\end{lemma}
+\textbf{Proof:} The proof is similar to the previous one.
+
+\begin{theorem} [Lifting the exponent lemma]
+Let $p$ be an odd prime and let $\nu_p(n)$
+	be the exponent of $p$ in the prime factorization of $n$.
+	If $a \equiv b \not\equiv 0 \pmod p$ then
+	$\nu_p(a^n-b^n) = \nu_p(n) + \nu_p(a-b)$.
+
+\end{theorem}
+
+\section{Example Problems}
+\begin{example}
+Given that $2^p+3^p=a^n$ for prime $p$ and positive integer $a$, prove that $n=1$
+\end{example}
+
+We see that 2+3=5; so taking $\upsilon_5$ we get,
+$$\upsilon_5(2^p+3^p)=\upsilon_5(2+3)+\upsilon_5(p)$$
+$$\implies \upsilon_5(2^p+3^p)=1+0=1$$
+
+so, $$\upsilon_5 (a^n)=1=n\upsilon_5(a)$$
+Hence $n=1$
+
+\begin{example}
+Prove that there exists infinitely many positive integers $n$ such that $n|2^n+3^n$
+\end{example}
+We take $n=5^k$ for positive integers $k$, we want to show that $5^k|2^{5^k}+3^{5^k}$
+
+From LTE, we show that $$\upsilon_5(2^{5^k}+3^{5^k})=\upsilon_5(2+3)+\upsilon_5(5^k)$$
+$$\implies \upsilon_5(2^{5^k}+3^{5^k})=1+k$$
+so, $5^{k+1}|2^{5^k}+3^{5^k} \implies 5^{k}|2^{5^k}+3^{5^k}$
+
+Hence there exists infinitely many positive integers $n$ of form $5^k$ that divides $a^n+b^n$
+
+\begin{example}
+Given that $a^p \equiv 1 \pmod {p^n}$ for prime $p$, prove that $a^p \equiv 1 \pmod {p^{n-1}}$
+\end{example}
+
+\begin{example}
+$2^m-3^n=1$ and $m,n \in \mathbb{N}$, find $m,n$.
+\end{example}
+\section{Practise Problems}

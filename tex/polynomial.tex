@@ -1,0 +1,337 @@
+\chapter{Polynomials}% by Mursalin Habib}
+
+\begin{linkb}
+   \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=w52vpcuTAwo}{Polynomial (Mursalin)}
+        \item \href{https://drive.google.com/file/d/1SoVQm_j-osYbXPg7ZHeS3hQdGCw9m0Yo/view}{Polynomials Pset}
+   \end{itemize}
+\end{linkb}
+
+
+What is a polynomial? Well, an example of a polynomial is given below:
+\[x^2-5x+6.\]
+Generally a polynomial is a form of:
+\[a_nx^n + a_{n-1}x^{n-1} + a_{n-2}x^{n-2}+ \ldots + a_2x^2 + a_1x + a_0 .\]
+where $a_n\neq 0$. Also assume that $a_n, a_{n-1}, \ldots$ are generally real numbers. 
+%otherwise  
+Here comes some definitions:
+\begin{definition}[Coefficient]
+$a_n,a_{n-1}, \ldots$ are called coefficients.
+\end{definition}
+\begin{definition}[Leading Coefficient]
+$a_n$ is called the leading coefficient.
+\end{definition}
+\begin{definition}[Degree of a polynomial]
+Maximum power $n$ is called the degree of a polynomial.
+\end{definition}
+\begin{definition}[Monic Polynomial]
+A polynomial with leading coefficient $1$ is called a monic polynomial.
+\end{definition}
+\begin{definition}[Root of polynomial]
+For a polynomial, $P(x)=a_nx^n + a_{n-1}x^{n-1} + a_{n-2}x^{n-2}+ \ldots + a_2x^2 + a_1x + a_0$. Roots of polynomial are the set of variables for which $P(x)=0$.
+\end{definition}
+\begin{theorem}[Fundamental theorem of Algebra]
+For any n-degree polynomial, there are at most n distinct roots.
+\end{theorem}
+Here we are introduced with some techniques to solve polynomial problems:
+\section{Exploiting Symmetry}
+\begin{example}
+Find all real $x$ that satisfy the equation
+\[(x-1)(x^2+1)(x^3+1)=30x^3.\]
+\end{example}
+Here do some algebra to get:
+\[x^6 + x^5 + x^4 -28x^3 +x^2 +x+1=0.\]
+It is a polynomial of degree $6$ which is messy.
+But you can see that here is a symmetry left to the term $-28x^3$ with the right part of the equation. 
+Also observe that, if $x$ is a root then $\frac{1}{x}$ is also a root. 
+So, we are going to divide the equation by $x^3$ and we get:
+\[x^3+x^2 +x -28 +\frac{1}{x}+\frac{1}{x^2}+\frac{1}{x^3}=1.\]
+Here we pair up $x^3$ with $\frac{1}{x^3}$ and so on. We get the following: 
+\[\left(x^3+\frac{1}{x^3}\right)+\left(x^2+\frac{1}{x^2}\right)+\left(x+\frac{1}{x}\right)-28=0.\]
+Now we assume $x+\frac{1}{x}=y$ and you see that, $x^3+\frac{1}{x^3}=y^3-3y, x^2+\frac{1}{x^2} =y^2-2y, x+\frac{1}{x}=y$ and we proceed by following:
+\begin{align*}
+\left(x^3+\frac{1}{x^3}\right)+\left(x^2+\frac{1}{x^2}\right)+\left(x+\frac{1}{x}\right)-28&=0\\
+y^3 -3y +y^2 -2y +y-28 &=0\\
+y^3 +y^2 -2y-30 &=0
+\end{align*}
+But it is a polynomial with degree $3$, which is also not so easy to solve. But we have a theorem for this: Rational Root Theorem.
+%\begin{theorem}[Rational Root Theorem]
+%A polynomial $P(x)$ has a rational root $\frac{p}{q}$ if and only if $p|a_0$ and $q|a_n$. 
+%\end{theorem} 
+if we can find a root of our polynomial then it comes easy to solve a quadratic eqaution.
+
+After playing with numbers, you can find a root $3$ which works!
+Then we have, \[(y-3)(\ldots)=y^3+y^2-2y-30.\]
+Now, you can solve the problem  and the rest is a good exercise so left as an exercise.
+
+Here we see another problem:
+\begin{example}
+Find all real solution to the eqaution,
+\[x^4 +(x-2)^4=34.\]
+\end{example}
+It is a $4$ degree polynomial, so we have to think wisely.
+An idea coomes that, we can rewrite the equation by folling, \[(y+1)^4+(y-1)^4=34\]
+where, $x=y+1$ and so $x-2=y-1$ After doing 
+some algebra we get a polynomial where all 
+the degrees of $y$ is even, and assume $y^2=z$ 
+then the polynomial is a quadratic and do some algebra.
+
+\section{Polynomial Division}
+You probably know that for a number $a$ we can find $q$ such that $q|a$ and we can write $a$ as follows:
+\[a=bq+r\] where $0\le r<b$.
+
+Similarly for a polynomial $a(x)$ we can find $b(x), q(x)$ and $r(x)$ such that,
+\[a(x)=b(x)q(x) +r(x).\]
+Here note that if $b(x)$ has degree $2$ then $r(x)$ is linear.
+
+By using these facts we can solve a problem now:
+\begin{example}
+Find the remainder when the polynomial $x^{81}+x^{49}+x^{25}+x^9 +x$ is divided by the polynomial $x^3-x$.
+\end{example}
+ Here observe that we can write the polynomial by $Q(x)(x^3-x) +r(x)$ and also observe that $r(x)$ has degree $2$.
+ So,
+ \[x^{81}+x^{49}+x^{25}+x^9 +x=Q(x)(x^3-x) +ax^2+bx+c.\]
+ Now we factor, \[x^3-x=x(x+1)(x-1).\]
+ Now, pluging $x=0, x=1, x=-1$ in the above equation we get, \[a=0, b=5, c=0\]
+ so, the remainder is $5x$.
+
+
+ Always remember to write a polynomial $a(x)$ by $b(x)q(x)+r(x)$.
+
+ Also remember the vieta's formulas. It  Assume that the polynomial 
+ \[a_nx^n + a_{n-1}x^{n-1} + a_{n-2}x^{n-2}+ \ldots + a_2x^2 + a_1x + a_0 .\]
+ has roots $r_1, r_2, r_3, \ldots , r_n$
+  we have 
+  \[ r_1+r_2+r_3+\ldots + r_n =-\frac{a_{n-1}}{a_n}\]
+ and, \[r_1r_2 +r_2r_3 +\ldots +r_{n-1}r_n=\frac{a_{n-2}}{a_n}\]
+ and similarly analogous...
+
+ Here are going to solve a problem using the above proposition.
+
+\begin{example}
+Given that, $a+b+c>0$, $ab+bc+ca>0$ and $abc>0$. Prove that, $a,b,c>0$.
+\end{example}
+Here we will use method of contradiction!
+
+%Assume that, 
+We are going to construct a polynomial:
+\[P(x)=x^3 -(a+b+c)x^2+(ab+bc+ca)x-abc\]
+which has roots $a,b,c$.
+
+And assume that $a$ is negative. But then $P(a)$ is negative which is supposed to be zero(as $a$ is a root of $P(x)$). Which is a contradiction!
+
+
+\begin{example}
+Let $n$ be a positive integer and for $1\le k \le n$ let $s_k$ be the sum of the products of the numbers $1, 1/2, 1/3,\ldots, 1/n$ taken $k$ at a time.
+For example,
+\[s_2 = 1\cdot \half + 1 \cdot \frac{1}{3} + \ldots \frac{1}{n-1}\cdot \frac{1}{n}\]
+Find $s_1 +s_2 +\ldots + s_n$.
+\end{example}
+It is left as an exercise for the interested readers.
+%\ldots
+
+%left as an exercise
+\begin{theorem}[Identity Theorem]
+Two polynomials $f(x), g(x)$ have degree less than $n$. If they intersect at $n+1$ points ($x_1, x_2, \ldots x_{n+1}$) so, $f(x_1)=g(x_1), f(x_2)=g(x_2), \ldots $.
+
+Then two polynomials are the same i.e. $f(x)=g(x)$.
+\end{theorem}
+Here let $P(x)=f(x)-g(x)$, it results that, $P(x)$ has $n+1$ roots which is not possible unless $P(x)$ is identically zero. (as $P(x)$ has degree at most $n$.)
+
+Here, we solve a problem using the above result.
+\begin{example}
+If $f(x)$ is a monic quartic polynomial such that $f(-1)=-1, f(2)=-4, f(-3)=-9$ and $f(4)=-16$. Find $f(1)$.
+\end{example}
+
+$f(-1)=-1, f(2)=-4, f(-3)=-9$ and $f(4)=-16$
+So, $f(x)=-x^2$ which is not a monic polynomial.
+
+We asssume $f(x)=x^4 + bx^3 + cx^2 +dx +e$ as it is monic and quartic.
+
+Then, consider the polynomial $f(x)+x^2=P(x)$ which is a 4 degree polynomial which has roots $-1, 2, -3, 4$.
+
+At these points $P(x)$ is zero, and as it is a quartic so we have, \[P(x)=c(x+1)(x-2)(x+3)(x-4)\]
+where $c$ is obviously zero as $f(x)$ is a monic.
+
+\begin{example}
+If $P(x)$ denotes a polynomial of degree $n$ such that \[P(k)=\frac{k}{k+1}\]
+for $k=0,1,2,\ldots, n$. Determine $P(n+1).$
+\end{example}
+Here conisder a polynomial \[(x+1)P(x)-x=f(x)\]
+by the above argument, we get, \[f(x)=cx(x-1)(x-2)(x-3)\cdots (x-n)\]
+Plugging $x=-1$ we get, $1=c(-1)^{n+1}(n+1)!$
+so, \[c=\frac{1}{(-1)^{n+1}(n+1)!}\]
+The rest is a good exercise.
+
+\section{Polynomial Interpolation}%, Polynomial Functional Equation}
+Suppose you are given that $f(1)=7, f(2)=4, f(10)=-5$ and you are told to find the function. This process is called Polynomial Interpolation. The above problem asks you to find the polynomial which graph goes through the points $(1,7), (2,4), (10,-5)$.
+
+\begin{example}
+What is the next term of the sequence $2,5,11,23,\ldots $?
+\end{example}
+The answer is what you want!
+
+We write $n$ term as $a_n$ and let \[a_n=(A_1 \times 2) + (A_2\times 5) + (A_3 \times 11) + (A_4 \times 23) + (A_5 \times 42)\]
+Take $A_1, _2, A_3, A_4, A_5$ such that if we plug $n=1$ then we get $A_1=1$ and $A_2=A_3=A_4=A_5=0$. Similarly for $n=2,3,4,5$.
+Magically take \[A_1=\frac{(n-2)(n-3)(n-4)(n-5)}{(1-2)(1-3)(1-4)(1-5)}\]
+
+and analogous for $A_2, A_3 ,\ldots$
+
+\begin{example}
+$f$ be a function such that $f(1)=7, f(2)=4, f(10)=-5$
+\end{example} 
+From the above example it is easy. 
+So,
+\[f(x)=\frac{(x-2)(x-10)}{(1-2)(1-10)} \times 7 + \frac{(x-1)(x-10)}{(2-1)(2-10)} \times 4 + \frac{(x-1)(x-2)}{(10-1)(10-2)} \times (-5)\]
+It is known as Lagrange Interpolation.
+It is useful in finding an algebraic form of a sequence.
+
+\begin{example}
+\[f(x)=\frac{(x-b)(x-c)}{(a-b)(a-c)} + \frac{(x-a)(x-c)}{(b-a)(b-c)} + \frac{(x-a)(x-b)}{(c-a)(c-b)}\]
+and $a\neq b \neq c$.
+$\deg(f)\le 2$.
+%What is the degree of $f$?
+\end{example}
+
+We get, $f(a)=f(b)=f(c)=1$. So, it is not possible to have degree 2. As it has same value at three points.
+
+Consider $f(x)-1=p(x)$, and $p(a), p(b), p(c)$ is zero. So, $p(x)$ is identically zero and $f(x)=1$.
+
+\begin{example}
+Let $a,b,c,d$ be distinct real numbers. Show that \[\frac{a^4}{(a-b)(a-c)(a-d)}+\frac{b^4}{(b-a)(b-c)(b-d)}+\frac{c^4}{(c-a)(c-b)(c-d)}+\ldots=a+b+c+d.\]
+%%%%%%%\[\frac{a^4}{(a-b)(a-c)(a-d)}+\frac{b^4}{(b-a)(b-c)(b-d)}+\frac{c^4}{(c-a)(c-b)(c-d)}+\frac{d^4}{(d-a)(d-b)(d-c)}=a+b+c+d.\]
+\end{example}
+\[P(x)=\frac{a^4(x-b)(x-c)(x-d)}{(a-b)(a-c)(a-d)}+\frac{b^4(x-a)(x-c)(x-d)}{(b-a)(b-c)(b-d)}+\frac{c^4(x-a)(x-b)(x-d)}{(c-a)(c-b)(c-d)}+\ldots\]
+
+%%%%\[P(x)=\frac{a^4(x-b)(x-c)(x-d)}{(a-b)(a-c)(a-d)}+\frac{b^4(x-a)(x-c)(x-d)}{(b-a)(b-c)(b-d)}+\frac{c^4(x-a)(x-b)(x-d)}{(c-a)(c-b)(c-d)}+\frac{d^4(x-a)(x-b)(x-c)}{(d-a)(d-b)(d-c)}\]
+
+The coefficient of $x^3$ in $P(x)$ 
+
+\[f(x)=x^4-P(x)=(x-a)(x-b)(x-c)(x-d).\]
+
+\section{Practice Problems}
+\begin{problem}
+Find all real x that satisfy the equation
+\[ (x+1)(x^2+1)(x^3+1)= 30x^3 \]
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+Find all real solutions to $ x^4 +(x-2)^4 = 34$.
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+Find the reminder when $x^81 + x^49 +x^25 + x^9 +x $ is divided by the polynomial $x^3-x$
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+Let $P(x) = x^4 + ax^3 + bx^2 + cx + d$ where $a$, $b$, $c$ and $d$ are constants. If $P(1) = 10$, $P(2) = 20$ and $P(3)= 30$. Compute,
+\[\frac{P(12)+ P(-8)}{10} \]
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+Find $x^2+y^2 $ if $x$ and $y$ are positive integers such that,
+\[xy + x+ y = 71 \text{ and } x^2y +xy^2 =880\]
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+Let $n$ be a positive integer, for $1\le k \le n$, let $s_k$ be the sum of the products of the numbers $1, 1/2,1/3,  \ldots ,1/n$, taken $k $ at a time. For example, 
+\[ s_2 = 1.\frac{1}{2} + 1.\frac{1}{3}+ \ldots +\frac{1}{n-1}.\frac{1}{n} \] 
+Find $s_1 +\ldots s_n$.
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+Let $a$, $b$ and $c$ be real numbers such that $a+b+c>0$, $ab+bc+ca>0$ and $abc>0$. Prove that $a,b$ and $c$ are all positive
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+Let $r,s$ and $ t $ be the three roots of the equation
+\[ 8x^3 + 1001x +2008=0\]
+Find $(r+s)^3 + (s+t)^3 + (t+r)^3$.
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+If $f(x)$ is a monic polynomial such that $f(-1)=-1$, $f(2)=-4$, $f(-3)= -9$ and $f(4)=-16$. Find $f(1)$.
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+If $P(x)$ denotes a polynomia of degree $n$ such that \[P(k) = \frac{k}{k+1}\]
+for $k= 0,1,\ldots ,n$, determine $P(n+1)$.
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+Let $a_1, a_2, a_3, \ldots, a_{10} $ be real numbers such that, 
+\[\frac{a_1}{1}+ \frac{a_2}{2} +\ldots + \frac{a_{10}}{10} =1 \]
+\[\frac{a_1}{2}+ \frac{a_2}{3} +\ldots + \frac{a_{10}}{11} =0 \]
+\[\frac{a_1}{3}+ \frac{a_2}{4} +\ldots + \frac{a_{10}}{12} =0 \]
+\[\ldots\]
+\[\frac{a_1}{10}+ \frac{a_2}{11} +\ldots + \frac{a_{10}}{19} =0 \]
+ Determine $a_1+a_2+ \ldots a_10$.
+
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+Let $a,b,c$ and $d$ be distinct real numbers. Show that 
+\[\frac{a^4}{(a-b)(a-c)(a-d)}+\frac{b^4}{(b-a)(b-c)(b-d)}+\frac{c^4}{(c-a)(c-b)(c-d)}+\ldots=a+b+c+d.\]
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+A polynomial of degree $3n$ takes the value $0$ at $2,5,8,\ldots,3n-1$. The value $1$ at $1,4,7,\ldots, 3n-2$ and the value $2$ at $0,3, \ldots, 2n$ and its value at $3n+1$ is $730$. Find $n$.
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+Find all polynomials $P(x)$ with real coefficients that satisfy
+\[(x-1)P(x)-xP(x-1)= x^2-x-1\]
+for all real number $x$.
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+Suppose that $P(x)$ is a polynomial of odd degree satisfying 
+\[P(x^2-1)=(P(x))^2 -1\]
+for all $x$. Prove that $P(x)= x$ for all $x$.
+\begin{hint}
+\addhint{}
+\addhint{}
+\end{hint}
+\end{problem}

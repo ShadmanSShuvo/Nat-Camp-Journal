@@ -1,0 +1,82 @@
+\chapter{Prime Numbers}% by DS Hasan}
+
+\begin{linkb}
+   \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=rPwHbwGOY3g}{Prime Numbers (DS)}
+        \item \href{https://drive.google.com/file/d/1nNdAErPUd7Qb7AP6xEruPmnuQth8V7r-/view?usp=sharing}{1} + 
+			\href{https://drive.google.com/file/d/1_s160_QGQXZUB9OJ1joou13TMVMoKMaE/view?usp=sharing}{2 (Book)}
+			
+		\item \href{https://drive.google.com/file/d/1vSGKVVaqVSZAYcWxXzIwzLstpvVKwJUy/view}{P Set}
+   \end{itemize}
+\end{linkb}
+
+(We followed the text \textit{Olympiad Number Theory} by Justin Stevans)
+
+Prime numbers are the heart of Number Theory. They form the atom of the numbers and understaning them is equivalent to understanding all the numbers.
+
+
+\section{p-adic Valuation}
+Here we see some advanced functions related to prime numbers. The \textbf{p-adic valuation.}
+\begin{definition}[p-adic Valuation]
+We define the p-adic valuation of $m$ to be the highest power of $p$ that divides $m$. The notation for this is $v_p(m)$.
+\end{definition}
+It is also known as the largest exponent function.
+
+As an example since $20 = 2^2 \cdot 5$ we have $v_2 (20) = 2$ and $v_5 (20) = 1$.
+
+Point to be noted that the above function is an additive function.
+So,
+\begin{theorem}[$v_p$ is an Additive Function]
+$v_p(ab)=v_p(a)+v_p(b)$.
+\end{theorem}
+\begin{proof}
+Set, $v_p(a)=e_1$ and $v_p(b)=e_2$. Then, 
+$a=p^{e_1}a_1$ and $b+p^{e_2}b_1$ where 
+$a_1$ and $b_1$ are relavtively prime to $p$. We get,
+\[ab = p^{e_1+e_2}a_1b_1 \implies v_p(ab)=e_1+e_2=v_p(a)+v_p(b).\]
+\end{proof}
+
+\begin{theorem}\label{vp:two}
+If $v_p(a)>v_p(b)$ then, $v_p(a+b)=v_p(b)$.
+\end{theorem}
+\begin{proof}
+Again write $v_p (a) = e_1$ and $v_p (b) = e_2$ . We therefore have $a = p^{e_1}a_1$ and
+$b = p^{e_2} b_1$ . Notice that
+\[ a + b = p^{e_1} a_1 + p^{e_2} b_1 = (p^{e_2} ) (p^{e_1 -e_2} a_1 + b_2.\]
+Since $e_1 \ge e_2 + 1$ we have $p^{e_1 -e_2} a_1 + b_2 \equiv b_2 \neq 0 \pmod p$ therefore $v_p (a + b) =
+e_2 = b$ as desired.
+\end{proof}
+
+\section{Example Problems}
+\begin{example}
+Prove that $\sum_{i=1} ^{n} \frac{1}{i} $ is not an integer for $n\ge 2$.
+\end{example}
+The key idea for the problems is to find a prime that divides into the
+denominator more than in the numerator.
+
+Notice that 
+\[ \sum_{i=1}^n \frac{1}{i}=\sum_{i=1}^n \frac{\frac{n!}{i}}{n!}\]
+We consider \(v_2\left(\sum_{i=1}^n \frac{n!}{i}\right)\). From \autoref{vp:two}, we get
+\[v_2\left( \frac{n!}{2i-1} + \frac{n!}{2i} \right)=v_2\left( \frac{n!}{2i}  \right)\]
+We then get $v_2 (\frac{n!}{4i-2} + \frac{n!}{4i})=v_2(\frac{n!}{4i})$ and reepating to sum up the factorial in this way we arrive at
+\[v_2\left(\sum_{i=1}^n \frac{n!}{i}\right) =v_2 \left(\frac{n!}{2^{\floor{\log_2 n}}} \right)\]
+However for \(\sum_{i=1}^n \frac{1}{i}\) to be an integer we need 
+\[v_2\left(\sum_{i=1}^n \frac{n!}{i}\right) \ge v_2(n!)\]
+\[v_2 \left(\frac{n!}{2^{\floor{\log_2 n}}} \right) \ge v_2(n!)\]
+\[0\ge \floor{\log_2 n}\]
+which is a contradiction since $n\ge 2$.
+
+
+\begin{example}
+Prove that $\sum_{i=0} ^{n} \frac{1}{2i+1}$ is not an integer for $n\ge 1$.
+\end{example}
+%Rewrite the sum here using
+ Define parity factorial i.e. $4!!=4\cdot 2$ and $5!!=5\cdot 3 \cdot 1$ and take the product of all odd numbers upto $2i+1$ and define as $(2i+1)!!$.
+
+Same as above example rewrite the summation using parity factorial.
+
+Then take $v_3$ and contradict that $0\ge \floor {\log_3(2n+1)}$.
+
+
+You can solve some problems from the text \textit{Olympiad Number Theory} by Justin Stevans.
+%\section{}

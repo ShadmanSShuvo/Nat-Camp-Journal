@@ -1,0 +1,148 @@
+\chapter{NT Functions}% by Ahsan Al Mahir}
+
+\begin{linkb}
+   \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=BIocWacBJEs}{Number Theory Functions (Lazim)}
+        \item \href{https://drive.google.com/file/d/1pedr_KX0Yom8O2hremeRoJO13zhEeEmY/view}{Class Note}
+   \end{itemize}
+\end{linkb}
+
+What is NT Function? Number Theoretic Function is a function which has Co-domain $\NN$. Some common tricks for solving such functions are,
+\begin{itemize}
+ \item Attempt to prove that the function is linear. (Proving $f(x) = ax + b $ for some constant $a,b$.). 
+ \item Use induction.
+ \item If a number is divided by infinitely many primes then the number is $0$
+ \item Always look if you can eliminate something. 
+ \item Try prime numbers, 1, n-1 or some large numbers-small numbers and so on.
+ \end{itemize} 
+\section{Some Techniques}
+ \begin{theorem}[Cauchy's functional equation]
+ If, 
+\[ f(x) + f(y) = f(x+y) \]
+ for all $x,y\in \mathbb Q $. Then $f(x) = cx$. $c$ is a constant such that $c\in \mathbb Q$
+\end{theorem}
+This is useful as we can use Cauchy in Number theory functions.
+ 
+ Another tip for practicing nt functions is practicing a lot of construction problems.
+ Dirichlet theorem is often useful, The weak version of this theorem is,
+ \begin{theorem}[Dirichlet theorem]
+ For $gcd(a,b) = 1$, there are infinitely many primes in the form of $an+b$, where n is variable.
+ \end{theorem}
+ However this is not easy to prove. Interested reader may look up the proof on internet/books.
+\section{Solving Some IMO SL Problems}
+
+ 
+ \begin{example}[IMO SL-2010/A1]
+ Find all function $f:\mathbb{R}\rightarrow\mathbb{R}$ such that for all $x,y\in\mathbb{R}$ the following equality holds
+ \[ f(\left\lfloor x\right\rfloor y)=f(x)\left\lfloor f(y)\right\rfloor \]
+ where $\left\lfloor a\right\rfloor $ is greatest integer not greater than $a$.
+ 
+ \end{example}
+\begin{soln}
+Desired functions are, $f(x) = 0$, $f(x) = c$ where $1\le c < 2 $
+
+let $P(x,y) \implies f(\left\lfloor x\right\rfloor y)=f(x)\left\lfloor f(y)\right\rfloor $
+(this is also known as assertion). 
+
+Now, \[P(0,0) \implies f(0) = f(0).\left \lfloor f(0) \right \rfloor \implies f(0) = 0 \text{ or }  \left\lfloor f(0) \right \rfloor = 1\]
+\textbf{Case 1:} $\left\lfloor f(0) \right \rfloor = 1 $. Then,
+
+
+\[P(0,y) \implies f(0) = f(0)\left\lfloor f(y)\right\rfloor \implies \left\lfloor f(y)\right\rfloor = 1 \]
+For all $y\in \mathbb R $.
+$\therefore 1 \le  f(y) < 2   $
+Now back to the main function.
+Notice, 
+\[f(\left\lfloor x\right\rfloor y) = f(x)  \]
+Plug in $y= \frac{y}{\left\lfloor x\right\rfloor} $. Then,
+$f(y)=f(x)$ for all $x,y \in \mathbb R$.
+
+$\therefore f$ must be a constant function. Means $f(x) = c $.Since $\left\lfloor f(y)\right\rfloor = 1$,  Hence, $1 \le  c < 2  $. Which is a solution of this function. One can easily verify.
+
+\textbf{Case 2: } f(0)= 0
+
+We observe some assertions, 
+$P(1,1) \implies f(1) = f(1)\left\lfloor f(1) \right \rfloor \implies f(1) = 0 \text { or } \left\lfloor f(1) \right \rfloor= 1 $
+
+
+\textbf{Sub-case 1: }  $f(1) = 0$.
+
+$ P(1,y) \implies f(y) = f(1) \left \lfloor f(y) \right \rfloor  \implies f(y) = 0$ for all real $y \in \mathbb R$.
+This is another solution which satisfies the given functional equation.
+
+
+\textbf{Sub-case 2: } $\left\lfloor f(1) \right \rfloor= 1 $
+
+
+%Then, $\left\lfloor f(1) \right \rfloor \implies = 0 $. 
+ $P(x,1)$ gives, $f(\left\lfloor x\right\rfloor) = f(x)$. 
+ Now let $n \in \mathbb N$ ($y $ is a real number). Then, $f(ny) = f(n) \left\lfloor f(y) \right\rfloor $. Set, $y = \frac{1}{n}  $. Then,
+ \[\ f(1) = f(n) \left\lfloor f\left (\frac{1}{n} \right) \right\rfloor =f(n) \left\lfloor f\left (\left\lfloor \frac{1}{n} \right\rfloor \right  ) \right\rfloor = f(n)\left\lfloor f(0) \right\rfloor  = 0.  \]
+But, $\left\lfloor f(1) \right \rfloor= 1 $ so $f(1) \ne 0$. So contradiction.
+No functions exist in this condition.
+\end{soln}
+
+
+
+\begin{example}[IMO SL 2019/N4]
+Find all functions $f:\mathbb Z_{>0}\to \mathbb Z_{>0}$ such that $a+f(b)$ divides $a^2+bf(a)$ for all positive integers $a$ and $b$ with $a+b>2019$.
+\end{example}
+
+
+\begin{soln}
+Let $P(x,y)$ be the assertion.
+\[P(1, n) \implies 1 + f(n) \mid 1 + nf(1)  \]
+By Dirichlet theorem, we can have $1 + nf(1)$ a prime number for infinitely many $n$.
+
+$\therefore 1 + f(n) = 1 + nf(1) $ . So, $f(n) = nf(1)$ for infinitely many n.
+Now we take such $n$ and any positive integer $a$ .
+\[P(a,n) \implies (a+ f(n)) \mid  (a^2 + nf(a))\]
+\[ \implies a+ nf(1) \mid  a^2 + nf(a )\]
+\[ \implies a+ nf(1)\mid f(1)(a^2 + nf(a )) - f(a)(a+ nf(1))\]
+\[ \implies a+ nf(1)\mid  a^2f(1) -a f(a )\]
+
+But we can take really big $n$. So, $a^2f(1) -a f(a)$ has to be $0$. So,  $f(a) = af(1)  $. 
+
+$f(1) $ can be any integer $\in \mathbb Z_{>0}$. It is easy to verify that this funtion satisfies the given equation. And we are done!
+
+\end{soln}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Practise Problems}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

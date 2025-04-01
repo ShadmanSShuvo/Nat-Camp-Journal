@@ -1,0 +1,186 @@
+\chapter{Basic Divisibility}% by Zim-mim Siddiqee Sowdha}
+\label{sec:divi}
+
+\begin{linkb}
+   \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=2LoYjvi0MH4}{Basic Divisibility (Sowdha)}
+        \item \href{https://drive.google.com/file/d/1YRvC4AQ2rwa4DsQxYd_7kHqyYZdrPQkX/view?usp=sharing}{Basic Number Theory - Masum Billal}
+   \end{itemize}
+\end{linkb}
+
+\section{Basic Divisibility}
+For all integers \(a\), \(1|a\). 
+
+\paragraph{Divisibility Properties}
+\begin{itemize}
+	\item \(a|b\) then there exist a inetger \(k\) s.t \(b=ak\).
+	\item \(a|b, a|c \implies a | b \pm c\)
+	\item \(a|b \implies a | bc\)
+	\item \(a|b, b|a \implies a=b\)
+	\item \(m|(a-b), m|(c-d) \implies m|(ac-bd)\). by \(m|(a-b)c-(c-d)b=ac-bd \)
+\end{itemize}
+
+\section{Division Algorithm}
+This is one of the most famous topic. It tells that if \(a, b \in \mathbb{Z}\) then there exists unique \(q,r\)
+s.t \[a=bq+r; \ \ \ \ 0\le r<|b|\]
+
+
+
+\section{Fundamental Theorem of Arithmetic (FTA)}
+Every integer has an unique prime power factorization which is called the Fundamental Theorem of Arithmetic.
+\[ N ={p_1}^{a_1} {p_2}^{a_2} {p_3}^{a_3} \cdots {p_m}^{a_m}. \]
+
+Let assume that, the factorization is not unique. Then we have, 
+\[ N ={p_1}^{a_1} {p_2}^{a_2} {p_3}^{a_3} \cdots {p_m}^{a_m} ={q_1}^{b_1} {q_2}^{b_2} {q_3}^{b_3} \cdots {q_n}^{b_n}. \]
+
+Now we have,
+\[p_1 | q_1 q_2 q_3 \cdots q_n\]
+\[\implies p_1 | q_i\]
+By Euclid's Lemma \[p_i = q_i\]
+
+If $m\neq n$ then $1=q_x q_y q_z$ for some $x,y,z$ which is a contradiction.
+
+\section{Modular Arithmetic}
+
+Modular Arithmetic means working with remainders where remainders aren't fixed. 
+\begin{enumerate}
+	\item \textbf{Congruence:}
+		$m|a-b \implies a \equiv b \pmod m$.
+	\item $a$ is divided by $m$ and remanider is $b$ then $a\equiv b \pmod m$.
+	\item $a=bq+r \implies a\equiv r \pmod b.$
+%	\item 
+\end{enumerate}
+
+\paragraph{Some Properties of Modular Arithmetic}
+\begin{enumerate}
+	\item $a\equiv b \pmod m \implies a+mx \equiv b+my \pmod m .$
+	\item $a\equiv b \pmod m; c \equiv d \pmod m \implies a \pm c \equiv b \pm d \pmod m .$
+	Also $ ka \equiv kb \pmod m .$
+	\item $a\equiv b \pmod m; c \equiv d \pmod m \implies ac \equiv bd \pmod m.$
+	Which means $a^k \equiv b^k \pmod m$ which is very useful.
+	\item $ak \equiv bk \pmod m \mathrm{and} (m,k)=1 \implies a \equiv b\pmod m.$
+\end{enumerate}
+
+\begin{example}
+$7^{259} \equiv m \pmod 5 .$ Find $m$.
+\end{example}
+
+\begin{soln}
+$$7^2 \equiv 2^2 \equiv 4 \equiv -1 \pmod 5$$ $$ (7^2)^{129} \equiv (-1)^{129} \equiv -1 \pmod 5 $$
+$$ 7^{259} \equiv -7 \equiv -7+10 \equiv 3 \pmod 5 $$.
+\end{soln}
+
+\section{Residue Class/System Modulo $m$}
+$n$ is an integer. $n$ divided by $6$ we can get $6$ residue. They are $0,1,2,3,4,5$. This set is called Residue system modulo $6$.
+Let $S$ be the set, then \[ S=\{0,1,2,3,4,5 \} \equiv \{0,1,8,3,4,-1\} \pmod 6 .\]
+
+The set is defined by $RS_{(m)}$
+
+And as an example, \[RS_{(12)} =\{0,1,2,3,\ldots , 11\}\]
+
+Note that here $1,5,7,11$ are coprime to $12$ and if we consider this set of \(\{1,5,7,11\}\) which is called as reduced Residue System modulo $12$.
+
+\[RRS_{(12)}=\{1,5,7,11\}\]
+
+$\varphi (m) $ is called the Euler's Totient Function and it is the number of elements in the set $RRS_{(m)}$. As an example $RRS_{(12)}=4$.
+
+For prime $p$ we have $\varphi (p) =p-1$.
+
+\begin{theorem}[Euler's Theorem]
+For any integer $a$ coprime to $m$, we have, \[a^{\varphi (m)} \equiv 1 \pmod m \].
+Which also means that \( a^{p-1} \equiv 1 \pmod p \).
+\end{theorem}
+
+
+Here is Fermat's Little Theorem. It comes from Euler's phi function.
+
+\begin{theorem}[Fermat's Little Theorem]
+Let $a$ be a positive integer and $p$ be a prime then, \[ a^p \equiv a \pmod p.\]
+\end{theorem}
+
+\section{Practice Problems}
+
+
+\begin{problem}
+Find all $d \in \mathbb{Z}^+$ such that $d$ divides $n^2+1$ and $(n+1)^2+1$ for some $n \in \mathbb{N} $
+	\begin{hint}
+		\addhint{Use $d|2n+1$ and $d|n^2+1$. try to transform them and then subtract.}
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+
+\begin{problem}
+Find the maximum value of $x$ such that $x + 25 | (x + 2)^2$
+	\begin{hint}
+		\addhint{ Homogenize both ends and then subtract to isolate $x$ on one end and a constant on the other.}
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+
+\begin{problem}
+Show that $2^{32}+1$ is divisible by $641$.
+	\begin{hint}
+		\addhint{Use $a\equiv b \pmod m; c \equiv d \pmod m \implies ac \equiv bd \pmod m.$ }
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+Prove that if $m|n$ then $a^m-1 | a^n -1$  
+	\begin{hint}
+		\addhint{$a^{xy}=(a^x)^y $}
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+Prove that for all odd $k \in \mathbb{N}$ -
+
+\begin{center}
+$1+2+ . . .+n|1^k+2^k+. . . + n^k$
+\end{center}
+	\begin{hint}
+		\addhint{$1+2+ . . .+n= \frac{n(n+1)}{2} $ }
+		\addhint{$1+(n-1)|i^k+(n-i)^k$ and $n+1|(i)^k+(n-i+1)^k$    }
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+Find all n such that
+\begin{center}
+$44 ... 44$ ($n$ times $4$)
+\end{center}
+is a perfect square.
+
+	\begin{hint}
+		\addhint{Look in mod 4}
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+Find all $n \in \mathbb{N} \cup \{0\} $ such that, $2^n+n | 8^n +n$
+	\begin{hint}
+		\addhint{$a + b|a^3 + b^3$ }
+		\addhint{Prove that $n \in [1,9]$ }
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+Find all positive integer solutions to the equation, $2^n-1=3^m$
+ 
+	\begin{hint}
+		\addhint{ }
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+Show that if $x^3+y^3=z^3$ then one of $x,y,z$ is divisible by $7$ 
+	\begin{hint}
+		\addhint{Use the set of cubic residues of mod 7}
+		\addhint{ }
+	\end{hint}
+\end{problem}

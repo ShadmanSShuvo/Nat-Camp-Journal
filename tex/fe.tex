@@ -1,0 +1,238 @@
+\chapter{Functional Equation}% by Raiyan Jamil}
+
+\begin{linkb}
+   \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=7QhswMDYy0Y}{Functional Equation (Raiyan)}
+        \item \href{https://drive.google.com/file/d/1KknJbbhPo3nK4ZneB3e22_bxlnGXF5j0/view}{Class} , \href{https://drive.google.com/file/d/1Kr_K2i_SQcefIWVR1yvgNN0Pnd3ZG0sg/view}{Chen}
+        \item \href{https://drive.google.com/file/d/1cf1tifSEqKebrrDLyk2DONn0-0VlBSWs/view}{P set}
+   \end{itemize}
+\end{linkb}
+
+(You can follow the note: \textit{Introduction to Functional Equation} by Evan Chen)
+
+
+
+\section{Definitions}
+Let $f : A \to B$ be a function.
+The set $A$ is called the \vocab{domain}, and $B$ the \vocab{codomain}.
+A couple definitions which will be useful:
+
+\begin{definition}
+	A function $f : A \to B$ is \vocab{injective} if $f(x) = f(y) \iff x=y$.
+	(Sometimes also called \emph{one-to-one}.)
+\end{definition}
+\begin{definition}
+	A function $ : A \to B$ is \vocab{surjective} if for all $b \in B$,
+	there is some $x \in A$ such that $f(x) = b$.
+	(Sometimes also called \emph{onto}.)
+\end{definition}
+\begin{definition}
+	A function is \vocab{bijective} if it is both injective and surjective.
+\end{definition}
+
+\section{1st example}
+\begin{example}
+Find all functions $ f:\mathbb{R}\to\mathbb{R} $ such that $ f(f(x)^2+f(y)) = xf(x)+y $,$ \forall x,y\in R $.
+\end{example}
+
+Taking $x=y=0$, we see $f(a)=0$ for $a=f(0)^2+f(0)$. Taking $x=a$ gives $f(f(y))=y$, which means $f$ is bijective. Since $f$ is bijective, $f(a)=0=f(f(0))\implies f(0)=0$. Taking $y=0$ and $x\mapsto f(x)$ yields $f(x^2)=f(x)f(f(x))=xf(x)$. Swapping the sign on $x$, we see $f$ is odd. Making the replacements, $x\mapsto f(x)$, and $y\mapsto f(y)$, gives$$f(x^2+y)=xf(x)+f(y)=f(x^2)+f(y).$$Now let $x\ge 0$, and note that
+\begin{align*}
+f(x^2+2x+1)&=(x+1)f(x+1)\\
+f(x^2)+2f(x)+f(1)&=(x+1)(f(x)+f(1))\\
+f(x)&=xf(1)
+\end{align*}But, $f$ odd extends this to all reals. Noting $f$ is involutive, we see that $f(1)=\pm 1$. This gives the solutions $\boxed{f=x}$ and $\boxed{f=-x}$
+
+\section{Cauchy's Functional Equation}
+\begin{theorem}[Cauchy's Functional equation over $\mathbb{Q}$]
+If $ f(a)+f(b)=f(a+b) $ over $\mathbb{Q}$, then $f(x)=kx$ are only solutions for it. 
+\end{theorem}
+Let $f(1)=k$
+
+Setting $x=y=0$, we get $f(0)=0$. and $x=y=1$, we get $2f(1)=f(2)=2k$.
+Now setting $(x,y)=(x,1)$, we get $f(x)+f(1)=f(x+1) \implies f(x+1)=kx+k=k(x+1)$, so we are done for integers.
+
+We can show that $q\times f(\frac{p}{q})=(p)=kp$.
+
+from where we get that $f(p/q)=\frac{kp}{q}$ and we are done over $\mathbb{Q}$
+
+\begin{example}[IMO 2019 P1]
+Let $\mathbb{Z}$ be the set of integers. Determine all functions $f: \mathbb{Z} \rightarrow \mathbb{Z}$ such that, for all integers $a$ and $b$,$$f(2a)+2f(b)=f(f(a+b)).$$
+\end{example}
+Set $a = 0$ to get $f(f(b)) = 2f(b) + f(0)$. Thus the given rewrites as $f(2a) + 2f(b) = 2f(a + b) + f(0)$. Now let $a = b$ to get $f(2a) = 2f(a) - f(0)$, so the given becomes $f(a) + f(b) = f(a + b) + f(0)$. Letting $g(x) = f(x) - f(0)$ this is just $g(a + b) = g(a) + g(b) $ over integers, implying cauchy, we get $g(x) = kx$ and $f(x) = kx + f(0)$
+
+Now doing some substitutions, we get $k=2$
+So, either $f(x)=0$ for all $x$ or $f(x)=kx+c$ 
+\begin{theorem}[Cauchy + Continuous $\implies$ Linear]
+	Suppose $f : \RR \to \RR$ satisfies $f(x+y) = f(x) + f(y)$.
+	Then $f(qx) = qf(x)$ for any $q \in \QQ$.
+	Moreover, $f$ is linear if any of the following are true:
+	\begin{itemize}
+		\ii $f$ is continuous in any interval. 
+		\ii $f$ is bounded (either above or below) in any nontrivial interval.
+		\ii There exists $(a,b)$ and $\eps > 0$ such that $(x-a)^2 + (f(x)-b)^2 > \eps$ for every $x$
+		(i.e.\ the graph of $f$ omits some disk, however small).
+	\end{itemize}
+\end{theorem}
+
+\begin{example}
+Find all continuous function $f: \RR \to \RR$ such that $$f(x+y)-f(x)-f(y)=xy(x+y)$$
+\end{example}
+
+\begin{example}[Field Automorphisms of $\RR$]
+	Solve over $\RR$:
+	\[ f(x+y) = f(x) + f(y) \quad\text{and}\quad f(xy) = f(x)f(y). \]
+\end{example}
+\begin{proof}
+	[Solution]
+	We claim $f(x) = x$ and $f(x) = 0$ are the only solutions (which both work).
+	According to the theorem, to prove $f$ is linear it suffices to show $f$ is nonnegative
+	over some nontrivial interval.
+	Now, \[ f(t^2) = f(t)^2 \ge 0 \] for any $t$,
+	meaning $f$ is bounded below on $[0,\infty)$
+	and so we conclude $f(x) = cx$ for some $c$.
+	Then $cxy = (cx)(cy)$ implies $c \in \{0,1\}$, as claimed.
+\end{proof}
+
+\section{Some intuitions and motivations}
+\begin{example}[Cancelling the stuffs]
+
+	Solve over $\RR$: \[ f(x^2+y) = f(x^{27} + 2y) + f(x^4). \]
+\end{example}
+\begin{soln}
+	For this problem, we claim the only answer is the constant function $f=0$.
+	As usual our first move is to take the all-zero setting, which gives $f(0) = 0$.
+
+	Now, let's step back: can we do anything that will make lots of terms go away?
+	There's actually a very artificial choice that will do wonders.
+	It is motivated by the \vocab{battle cry}:
+	\begin{quote}
+		\itshape ``DURR WE WANT STUFF TO CANCEL.''
+	\end{quote}
+	So we do the most blithely stupid thing possible.
+	\emph{See that $x^2+y$ and $x^{27}+2y$ up there?}
+	Let's make them equal in the rudest way possible:
+	\[ x^2 + y = x^{27} + 2y \iff y = x^2 - x^{27}. \]
+	Plugging in this choice of $y$,
+	this gives us $f(x^4) = 0$, so $f$ is zero on all nonnegatives.
+
+	All that remains is to get $f$ zero on all reals.
+	The easiest way to do this is put $y=0$ since this won't 
+	hurt the already positive $x^2$ and $x^4$ terms there.
+\end{soln}
+This is a common trick: see if you can make a substitution that will kill off two terms.
+
+\begin{example}[Finding a constant term]
+	\label{ex:singapore}
+	Solve over $\RR$:
+	\[ (x-y)f(x+y) - (x+y)f(x-y) = 4xy(x^2-y^2). \]
+\end{example}
+\begin{soln}
+	First of all, the $x-y$ and $x+y$ everywhere are a mess,
+	so we replace them with $a = x+y$ and $b = x-y$
+	(this doesn't lose any information).
+	Then $x^2-y^2 = ab$, and also $2x = a+b$, $2y = a-b$.
+	So, the equation is just saying that
+	\[ bf(a) - af(b) = ab(a^2-b^2). \]
+
+	Plugging  $a=0$ is fruitful: we derive
+	$bf(0) = 0$, so $f(0) = 0$.
+	
+	Next, assume $a,b \neq 0$.
+	We do the following nice trick:
+	if we divide by $ab$, we obtain
+	\[ \frac{f(a)}{a} - \frac{f(b)}{b} = a^2 - b^2. \]
+	You'll notice that the $a$ and $b$ terms are completely isolated now!
+	That is, we can write
+	\[ \frac{f(a)}{a} - a^2 = \frac{f(b)}{b} - b^2. \]
+	This is enough to imply that $\frac{f(a)}{a} - a^2 = c$ for some constant $c$,
+	whenever $a \neq 0$; hence $f(x) = x^3 + cx$ for some $c$.
+	Initially we only know this for $x \neq 0$,
+	but it holds for $x=0$ as well since $f(0) = 0$.
+
+	And now, we observe that these solutions all work, and we're done.
+\end{soln}
+
+\section{Three More Tricks}
+Here are three more tricks that are frequently useful.
+
+\begin{itemize}
+	\ii \vocab{Tripling an involution}.
+	If you know something about $f(f(x))$,
+	try applying it $f(f(f(x)))$ in different ways.
+	For example, if we know that $f(f(x)) = x+2$,
+	then we obtain $f^3(x) = f(x+2) = f(x)+2$.
+
+	\ii \vocab{Isolated parts}.
+	When trying to obtain injective or surjective,
+	watch for ``isolated'' variables or parts of the equation.
+	For example, suppose you have a condition like
+	\[ f(x+2xf(y)^2) = yf(x) + f(f(y)+1) \]
+	
+	Noting that $f \equiv 0$ works, assume $f$ is not zero everywhere.
+	Then by taking $x_0$ with $f(x_0) \neq 0$,
+	one obtains $f$ is injective.
+	(Try putting in $y_1$ and $y_2$.)
+
+	Proving surjectivity can often be done in similar spirit.
+	For example, suppose
+	\[ f(f(y)+xf(x)) = y+f(x)^2. \]
+	By varying $y$ with $x$ fixed we get that $f$ is surjective,
+	and thus we can pick $x_0$ so that $f(x_0) = 0$
+	and go from there.
+	Surjectivity can be especially nice if every $y$
+	is wrapped in an $f$, say; then each $f(y)$ just becomes
+	replace by an arbitrary real.
+
+	\ii \vocab{Exploiting ``bumps'' in symmetry}.
+	If some parts of an equation are symmetric and others are not,
+	swapping $x$ and $y$ can often be helpful.
+	For example, suppose you have a condition like
+	\[ f(x+f(y)) + f(xy) = f(x+1)f(y+1) - 1 \]
+
+	This equation is ``almost symmetric'',
+	except for a ``bump'' on the far left where $f(x+f(y))$ is asymmetric.
+	So if we take the equation with $x$ and $y$ flipped
+	and then eliminate the common terms,
+	we manage to obtain \[ f(x+f(y)) = f(y+f(x)). \]
+	If we've shown $f$ is injective, we are even done!
+	So often these ``bumps'' are what let you solve a problem.
+	(In particular, don't get rid of the bumps!)
+\end{itemize}
+
+
+\section{Practise Problems}
+\begin{problem}
+Find all continuous functions $f: \mathbb{R} \to \mathbb{R}$ such that $$f(f(x+y))=f(x)+f(y)$$
+\begin{hint}
+\addhint{plugging in $(x+y,0)$ helps}
+\addhint{Find $f(0)$}
+\addhint{use cauchy}
+\end{hint}
+\end{problem}
+
+\begin{problem}
+Find all functions $f: \mathbb{R} \to \mathbb{R}$ such that $$f(f(x+y))=f(x+y)+f(x)f(y)-xy$$ for all $x,y \in \mathbb{R}$
+\begin{hint}
+\addhint{}
+\end{hint}
+\end{problem}
+
+\begin{problem}
+Find all functions $f: \mathbb{R} \to \mathbb{R}$ such that $$f(x+2y)=f(x)(2y+1)+f(xy)$$ for all $x,y \in \mathbb{R}$
+\begin{hint}
+\addhint{}
+\end{hint}
+\end{problem}
+
+\begin{problem}
+Find all continuous functions $f: \mathbb{R} \to \mathbb{R}$ such that $$f(x+af(y))=f(x+y)+(a-1)y$$ for $a\neq 0,1$ is a constant.
+\begin{hint}
+\addhint{}
+\end{hint}
+\end{problem}
+\begin{problem}
+Find all functions $f: \mathbb{R} \to \mathbb{R}$ such that $$f(x^2+y)=f(f(x)-y)+4f(x)y$$ for all $x,y \in \mathbb{R}$
+\begin{hint}
+\addhint{}
+\end{hint}
+\end{problem}

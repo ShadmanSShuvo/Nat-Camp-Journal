@@ -1,0 +1,185 @@
+\chapter{Induction}% by Muhaiminul Islam Ninad}
+
+\begin{linkb}
+   \begin{itemize}
+        \item \href{https://www.youtube.com/watch?v=C-0pRTD4H0w}{Induction (Ninad)} 
+        \item \href{https://drive.google.com/file/d/1Z1h4jfZvrb69Jrayc0IMmopX9yzz9Z_L/view?usp=sharing}{First} \(+\) \href{https://drive.google.com/file/d/12zWftwXBXeYKMCBMGh-cPhG69r0zoc99/view}{Second}
+   \end{itemize}
+\end{linkb}
+
+Today's Topic is Basic Induction. Our mentor started with showing an inductive proof of sum of positive integers:
+\[ 1 + 2 +3+ \ldots + n = \frac{n(n+1)}{2} .\]
+It is easy and left as an exercise.
+
+\section{Induction/Weak Induction}
+Our next problem is:
+
+\begin{example}
+Let, \(a_1=\sqrt{2}, a_{i+1}=\sqrt{2+a_i}\). Prove that, \[ a_n = 2\cos \frac{\pi}{2^{n+1}}. \]
+\end{example}
+
+\begin{soln}
+Here we show that, base case is true as \(a_1=2\cos \frac{\pi}{2^2} = 2\cos \frac{\pi}{4} =2 \cdot \frac{1}{\sqrt 2} = \sqrt{2} \).
+
+Now assume that it is true for \(a_k\) and \(a_k=2\cos \frac{\pi}{2^{k+1}}\). Then we will show that \(a_{k+1} = 2\cos \frac{\pi}{2^{k+2}}\).
+
+\end{soln} 
+
+
+\begin{example}
+Show that for all positive integer \(n\), \[ 1+ \frac{1}{\sqrt{2}}+ \frac{1}{\sqrt{3}}+ \frac{1}{\sqrt{4}}+ \ldots \frac{1}{\sqrt{n}} \le 2\sqrt{n}. \]
+\end{example}
+
+\begin{soln}
+Here, after showing the base case true, assume that it's true for integer $k$. Then for $k+1$, add $\frac{1}{\sqrt{k+1}}$ to both side.
+
+After these, show that, $2\sqrt{k} + \frac{1}{k+1} \le 2\sqrt{k+1}$
+Done!
+\end{soln}
+
+\begin{example}
+Prove that for all positive integer \(n\), 
+\[ \frac{1}{2} \cdot  \frac{3}{4} \cdot  \frac{5}{6} \cdot \cdots  \frac{2n-1}{2n} < \frac{1}{\sqrt{3n}} .\]
+\end{example}
+
+\begin{soln}
+Here assume that it's tru for $k-1$ then show for $k$.
+
+Then do some algebra which is left as exercise!
+\end{soln}
+
+
+\section{Strong Induction}
+In this tecknique, we will assume that the statement is true for all integers from base case to \(k\) (in general).
+Then we will show that its true for \(k+1\), and often we use the assertion that the statement is true for all integers from base case to \(k\).
+
+\begin{example}
+%Prove that any positive integer can be written as the sum of distinct and non-consecutive one or more Fibonacci Numbers.
+The Fiobonacci sequence is defined as $F_1 = 1, F_2 = 2$ and for $n \ge 1$,
+$F_{m+2} = F_{m+1} + F_m$. Show that every natural number n can be written as a sum of distinct
+fiobonacci numbers, with no $2$ Fiobonacci numbers being consecutive ($F_n$ and $F_{n+1}$ are
+consecutive).
+\end{example}
+%Note that Fibonacci numbers are \(F_1=1, F_2 = 1 , F_3 =3, \ldots F_n=F_{n-1} + F_{n-2} \).
+\begin{soln}
+We proceed by strong induction. Let $P(n)$ be the statement that n can be written
+as a sum of distinct fiobonacci numbers with no $2$ consecutive. It is easy to verify $P(1)$
+and $P(2)$. We now proceed by strong induction, so assume $P(i)$ for all $1 \le i \le n$. Now
+consider the number $n + 1$ and the highest $F_m$ such that $F_m \le n + 1$. Then if $n + 1 = F_m$ we are done.
+Otherwise, $n + 1 - F_m$ is a positive integer less than $n + 1$, and so $P(n + 1 - F_m)$ is
+true by assumption. Therefore, we can write $n + 1 - F_m = F_{i_1} + F_{i_2} + \dots + F_{i_k}$ for distinct Fiobonacci numbers, no $2$ of which are consecutive. Now we have written $n + 1$ as a sum of distinct fiobonacci numbers
+\[ n + 1 = F_{i_1} + F_{i_2} + \ldots + F_{i_k} + F_m.\]
+such that no $2$ are consecutive execpt possibly the largest $2$, if $F_{i_k} = F_{m-1}$. But the latter case would imply that $n \le F_m + F_{m-1} = F_{m+1}$, contradicting the choice of $m$. This completes the induction.
+\end{soln}
+The above soln is from Jacob Tsimerman's \textit{A closer look at Induction} note.
+
+
+
+
+\section{Real Induction}
+\begin{example}
+There are \(n\) lamps in a room, with certain lamps connected by wires. Initially
+all lamps are off. You can press the on/off button on any lamp \(A\), but this also switches
+the state of all the lamps connected to lamp \(A\) from on to off and vice versa. Prove that
+by pressing enough buttons you can make all the lamps on. (Connections are such that if
+lamp \(A\) is connected to lamp \(B\), then lamp \(B\) is also connected to lamp \(A\).)
+\end{example}
+
+\begin{soln}
+We use induction on n. The base case of \(n = 1\) is trivial (just turn the lamp on).
+Now assume the case of \(n - 1\) lamps. Now look at the set of n lamps and ignore some
+lamp \(A\). Then by induction, we can turn the remaining lamps on by pressing the buttons
+on some subset of them. Now if at the end of doing this \(A\) is also on, we are done. So we
+can assume that at the end of doing this \(A\) is off. Since \(A\) was an arbitrary lamp, we can
+assume that by pressing a sequence of buttons we can flip the states of all lamps except
+one of our choosing. Now, taking \(A\) and \(B\) to be 2 different lamps and flipping the states
+first of all lamps different from \(A\) and then all lamps different from B, we see that we can
+flip the states of only \(A\) and \(B\). So this means we can flip the states of any number of even
+lamps. Now we have 2 cases:
+\begin{itemize}
+	\item \(n\) is even: Then we are already done, since we can flip the states of any number of
+even lamps.
+	\item \(n\) is odd: In this case, there must be some lamp A connected to an even number of
+lamps (prove this!) so first press the button on lamp \(A\). Now, including \(A\), an odd
+number of lamps are on, so an even number of lamps that are off remain. Flip their
+states to finish the proof!
+\end{itemize}
+
+\end{soln}
+The above solution is from Jacob Tsimerman's \textit{A closer look at Induction} note.
+
+Our class ended!
+
+%\begin{problem}
+
+%\end{problem}
+
+
+
+\section{Practice Problems}
+
+
+\begin{problem}
+
+	\begin{hint}
+		\addhint{ }
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+
+	\begin{hint}
+		\addhint{ }
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+
+	\begin{hint}
+		\addhint{ }
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+
+	\begin{hint}
+		\addhint{ }
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+
+	\begin{hint}
+		\addhint{ }
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+
+	\begin{hint}
+		\addhint{ }
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+\begin{problem}
+
+	\begin{hint}
+		\addhint{ }
+		\addhint{ }
+	\end{hint}
+\end{problem}
+
+
+\begin{problem}
+
+	\begin{hint}
+		\addhint{ }
+		\addhint{ }
+	\end{hint}
+\end{problem}

@@ -1,0 +1,900 @@
+%%thanks to evan chen and ahsan al mahir lazim.
+
+
+\ProvidesPackage{shuvo}
+%%fakesection Argument processing
+% Default Arguments
+% We include "shuvo" in all of these to make sure
+% that they don't collide with anything in external packages
+\newif\ifshuvofancy\shuvofancytrue
+\newif\ifshuvohdr\shuvohdrtrue
+\newif\ifshuvohref\shuvohreftrue
+\newif\ifshuvosetup\shuvosetuptrue
+\newif\ifshuvothm\shuvothmtrue
+\newif\ifshuvosecthm\shuvosecthmfalse
+\newif\ifshuvoht\shuvohtfalse
+\newif\ifshuvopkg\shuvopkgtrue
+\newif\ifshuvopdf\shuvopdftrue
+\newif\ifshuvoauthor\shuvoauthortrue
+\newif\ifshuvochinese\shuvochinesefalse
+\newif\ifshuvomdthm\shuvomdthmfalse
+\newif\ifshuvodiagrams\shuvodiagramsfalse
+\newif\ifshuvopatchasy\shuvopatchasyfalse
+\newif\ifshuvohints\shuvohintsfalse
+\newif\ifshuvofonts\shuvofontsfalse
+\newif\ifshuvoasy\shuvoasytrue
+\newif\ifshuvocolorsec\shuvocolorsecfalse
+\newif\ifshuvotitlemark\shuvotitlemarktrue
+
+%Receive Arguments
+\DeclareOption{chinese}{\shuvohreffalse\shuvochinesetrue} % Chinese support
+% allow href to override this one
+
+\DeclareOption{long}{\shuvosecthmtrue\shuvomdthmtrue\shuvocolorsectrue} % long docs
+
+\DeclareOption{fancy}{\shuvofancytrue}
+\DeclareOption{nofancy}{\shuvofancyfalse}
+\DeclareOption{hdr}{\shuvohdrtrue}
+\DeclareOption{nohdr}{\shuvohdrfalse}
+\DeclareOption{href}{\shuvohreftrue}
+\DeclareOption{nohref}{\shuvohreffalse}
+
+\DeclareOption{nosetup}{\shuvosetupfalse}
+\DeclareOption{thm}{\shuvothmtrue}
+\DeclareOption{nothm}{\shuvothmfalse}
+\DeclareOption{secthm}{\shuvosecthmtrue}
+\DeclareOption{nosecthm}{\shuvosecthmfalse}
+
+\DeclareOption{ht}{\shuvohttrue}
+\DeclareOption{nopdf}{\shuvopdffalse}
+\DeclareOption{nopkg}{\shuvopkgfalse}
+\DeclareOption{noauthor}{\shuvoauthorfalse}
+\DeclareOption{titlemark}{\shuvotitlemarktrue} % Sets title in ohead, not \rightmark
+\DeclareOption{sectionmark}{\shuvotitlemarkfalse} % Uses \rightmark not title in ohead
+
+\DeclareOption{mdthm}{\shuvomdthmtrue}
+\DeclareOption{nomdthm}{\shuvomdthmfalse}
+\DeclareOption{diagrams}{\shuvodiagramstrue}
+\DeclareOption{nodiagrams}{\shuvodiagramsfalse}
+\DeclareOption{colorsec}{\shuvocolorsectrue}
+\DeclareOption{nocolorsec}{\shuvocolorsecfalse}
+
+\DeclareOption{patchasy}{\shuvopatchasytrue}
+\DeclareOption{noasy}{\shuvoasyfalse}
+
+\DeclareOption{hints}{\shuvohintstrue}
+
+\DeclareOption{fonts}{\shuvofontstrue}
+
+\ProcessOptions\relax
+
+% if packages not loaded, turn off mdthm and asy
+\ifshuvopkg\else\shuvomdthmfalse\fi
+\ifshuvopkg\else\shuvoasyfalse\fi
+
+% If no setup, turn off theorems
+\ifshuvosetup\else\shuvothmfalse\fi
+
+%%fakesection Some macros
+%Small commands
+\ifshuvopkg
+	\usepackage{amsmath,amssymb}
+\fi
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\mailto}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\wt}{\widetilde}
+\newcommand{\wh}{\widehat}
+\newcommand{\eps}{\varepsilon}
+%\renewcommand{\iff}{\Leftrightarrow}
+%\renewcommand{\implies}{\Rightarrow}
+\newcommand{\vocab}[1]{\textbf{\color{purple} #1}}
+\providecommand{\alert}{\vocab}
+\providecommand{\half}{\frac{1}{2}}
+\newcommand{\catname}{\mathsf}
+\newcommand{\hrulebar}{
+  \par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
+  \par\nointerlineskip \vspace{\baselineskip}
+}
+
+%For use in author command
+\newcommand{\plusemail}[1]{\\ \normalfont \texttt{\mailto{#1}}}
+
+%More commands and math operators
+\DeclareMathOperator{\cis}{cis}
+\DeclareMathOperator*{\lcm}{lcm}
+\DeclareMathOperator*{\argmin}{arg min}
+\DeclareMathOperator*{\argmax}{arg max}
+
+%Convenient Environments
+%%%\newenvironment{soln}{\begin{proof}[Solution]}{\end{proof}}
+\newenvironment{parlist}{\begin{inparaenum}[(i)]}{\end{inparaenum}}
+\newenvironment{gobble}{\setbox\z@\vbox\bgroup}{\egroup}
+
+%Inequalities
+\newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
+\newcommand{\symsum}{\sum_{\mathrm{sym}}}
+\newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
+\newcommand{\symprod}{\prod_{\mathrm{sym}}}
+
+%From H113 "Introduction to Abstract Algebra" at UC Berkeley
+\newcommand{\CC}{\mathbb C}
+\newcommand{\FF}{\mathbb F}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\charin}{\text{ char }}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Syl}{Syl}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\GL}{GL} % General linear group
+\DeclareMathOperator{\SL}{SL} % Special linear group
+
+%From Kiran Kedlaya's "Geometry Unbound"
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\dang}{\measuredangle} %% Directed angle
+\newcommand{\ray}[1]{\overrightarrow{#1}} 
+\newcommand{\seg}[1]{\overline{#1}}
+\newcommand{\arc}[1]{\wideparen{#1}}
+
+%From M275 "Topology" at SJSU
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\taking}[1]{\xrightarrow{#1}}
+\newcommand{\inv}{^{-1}}
+
+%From M170 "Introduction to Graph Theory" at SJSU
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\ord}{ord}
+\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
+
+%From the USAMO .tex files
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\dg}{^\circ}
+\newcommand{\ii}{\item}
+
+% From Math 55 and Math 145 at Harvard
+\newenvironment{subproof}[1][Proof]{%
+\begin{proof}[#1] \renewcommand{\qedsymbol}{$\blacksquare$}}%
+{\end{proof}}
+
+\newcommand{\liff}{\leftrightarrow}
+\newcommand{\lthen}{\rightarrow}
+\newcommand{\opname}{\operatorname}
+\newcommand{\surjto}{\twoheadrightarrow}
+\newcommand{\injto}{\hookrightarrow}
+\newcommand{\On}{\mathrm{On}} % ordinals
+\DeclareMathOperator{\img}{im} % Image
+\DeclareMathOperator{\Img}{Im} % Image
+\DeclareMathOperator{\coker}{coker} % Cokernel
+\DeclareMathOperator{\Coker}{Coker} % Cokernel
+\DeclareMathOperator{\Ker}{Ker} % Kernel
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Spec}{Spec} % spectrum
+\DeclareMathOperator{\Tr}{Tr} % trace
+\DeclareMathOperator{\pr}{pr} % projection
+\DeclareMathOperator{\ext}{ext} % extension
+\DeclareMathOperator{\pred}{pred} % predecessor
+\DeclareMathOperator{\dom}{dom} % domain
+\DeclareMathOperator{\ran}{ran} % range
+\DeclareMathOperator{\Hom}{Hom} % homomorphism
+\DeclareMathOperator{\Mor}{Mor} % morphisms
+\DeclareMathOperator{\End}{End} % endomorphism
+
+% Things Lie
+\newcommand{\kb}{\mathfrak b}
+\newcommand{\kg}{\mathfrak g}
+\newcommand{\kh}{\mathfrak h}
+\newcommand{\kn}{\mathfrak n}
+\newcommand{\ku}{\mathfrak u}
+\newcommand{\kz}{\mathfrak z}
+\DeclareMathOperator{\Ext}{Ext} % Ext functor
+\DeclareMathOperator{\Tor}{Tor} % Tor functor
+\newcommand{\gl}{\opname{\mathfrak{gl}}} % frak gl group
+\renewcommand{\sl}{\opname{\mathfrak{sl}}} % frak sl group chktex 6
+
+% More script letters etc.
+\newcommand{\SA}{\mathcal A}
+\newcommand{\SB}{\mathcal B}
+\newcommand{\SC}{\mathcal C}
+\newcommand{\SF}{\mathcal F}
+\newcommand{\SG}{\mathcal G}
+\newcommand{\SH}{\mathcal H}
+\newcommand{\OO}{\mathcal O}
+
+\newcommand{\SCA}{\mathscr A}
+\newcommand{\SCB}{\mathscr B}
+\newcommand{\SCC}{\mathscr C}
+\newcommand{\SCD}{\mathscr D}
+\newcommand{\SCE}{\mathscr E}
+\newcommand{\SCF}{\mathscr F}
+\newcommand{\SCG}{\mathscr G}
+\newcommand{\SCH}{\mathscr H}
+
+% Mathfrak primes
+\newcommand{\km}{\mathfrak m}
+\newcommand{\kp}{\mathfrak p}
+\newcommand{\kq}{\mathfrak q}
+
+%% Napkin commands
+\newcommand{\prototype}[1]{
+	\emph{{\color{red} Prototypical example for this section:} #1} \par\medskip
+}
+\newenvironment{moral}{%
+	\begin{mdframed}[linecolor=green!70!black]%
+	\bfseries\color{green!70!black}}%
+	{\end{mdframed}}
+
+%%fakesection Asymptote setup
+\ifshuvoasy
+	\ifshuvopatchasy
+		\usepackage{patch-asy}
+	\else
+		\usepackage{asymptote}
+	\fi
+	\begin{asydef}
+		defaultpen(fontsize(10pt));
+		size(8cm); // set a reasonable default
+		usepackage("amsmath");
+		usepackage("amssymb");
+		settings.tex="pdflatex";
+		settings.outformat="pdf";
+		// Replacement for olympiad+cse5 which is not standard
+		import geometry;
+		// recalibrate fill and filldraw for conics
+		void filldraw(picture pic = currentpicture, conic g, pen fillpen=defaultpen, pen drawpen=defaultpen)
+			{ filldraw(pic, (path) g, fillpen, drawpen); }
+		void fill(picture pic = currentpicture, conic g, pen p=defaultpen)
+			{ filldraw(pic, (path) g, p); }
+		// some geometry
+		pair foot(pair P, pair A, pair B) { return foot(triangle(A,B,P).VC); }
+		pair orthocenter(pair A, pair B, pair C) { return orthocentercenter(A,B,C); }
+		pair centroid(pair A, pair B, pair C) { return (A+B+C)/3; }
+		// cse5 abbrevations
+		path CP(pair P, pair A) { return circle(P, abs(A-P)); }
+		path CR(pair P, real r) { return circle(P, r); }
+		pair IP(path p, path q) { return intersectionpoints(p,q)[0]; }
+		pair OP(path p, path q) { return intersectionpoints(p,q)[1]; }
+		path Line(pair A, pair B, real a=0.6, real b=a) { return (a*(A-B)+A)--(b*(B-A)+B); }
+		// cse5 more useful functions
+		picture CC() {
+			picture p=rotate(0)*currentpicture;
+			currentpicture.erase();
+			return p;
+		}
+		pair MP(Label s, pair A, pair B = plain.S, pen p = defaultpen) {
+			Label L = s;
+			L.s = "$"+s.s+"$";
+			label(L, A, B, p);
+			return A;
+		}
+		pair Drawing(Label s = "", pair A, pair B = plain.S, pen p = defaultpen) {
+			dot(MP(s, A, B, p), p);
+			return A;
+		}
+		path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
+			draw(g, p, ar);
+			return g;
+		}
+	\end{asydef}
+\fi
+%%fakesection BEGIN MAIN SETUP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifshuvosetup
+	%%fakesection Set up author and date
+	\ifshuvoauthor
+		\author{Shadman Shahriyar Shuvo}
+		\date{\today}
+	\fi
+	%%fakesection Hyperref
+	\ifshuvopkg
+		\PassOptionsToPackage{usenames,svgnames,dvipsnames,table}{xcolor}
+		\usepackage{xcolor}
+		\ifshuvohref
+			\usepackage[colorlinks=true]{hyperref}
+			\hypersetup{urlcolor=Blue!80!Yellow,linkcolor=Chartreuse!70!Black,citecolor=DarkGreen}
+			%\hypersetup{urlcolor=ProcessBlue!80!RubineRed,linkcolor=Chartreuse!80!Blue,citecolor=DarkGreen}
+			%\hypersetup{urlcolor=RubineRed,linkcolor=RoyalBlue,citecolor=ForestGreen}
+		\fi
+		\usepackage[nameinlink]{cleveref}
+	\fi
+	%%fakesection New Theorem Styles
+	\ifshuvothm
+		\usepackage{amsthm}
+	\fi
+	\ifshuvomdthm
+		\usepackage{amsthm} % needed for nothm+mdthm
+		\usepackage{thmtools}
+		\usepackage[framemethod=TikZ]{mdframed}
+		\mdfdefinestyle{mdbluebox}{%
+			roundcorner = 10pt,
+			linewidth=1pt,
+			skipabove=12pt,
+			innerbottommargin=9pt,
+			skipbelow=2pt,
+			linecolor=purple,
+			nobreak=true,
+			backgroundcolor=red!2 %TealBlue!5,
+		}
+		\declaretheoremstyle[
+			headfont=\sffamily\bfseries\color{MidnightBlue}\large,
+			notefont=\ttfamily,
+			mdframed={style=mdbluebox},
+			headpunct={\\[3pt]},
+			postheadspace={0pt}
+		]{thmbluebox}
+		\mdfdefinestyle{mdredbox}{%
+			linewidth=0.5pt,
+			skipabove=12pt,
+			frametitleaboveskip=5pt,
+			frametitlebelowskip=0pt,
+			skipbelow=2pt,
+			frametitlefont=\sffamily\bfseries,
+			innertopmargin=4pt,
+			innerbottommargin=8pt,
+			nobreak=true,
+			backgroundcolor=Cyan!5,
+			%Yellow!10,
+			%Orange!5,
+			%Salmon!5,
+			linecolor=Blue!70!magenta,
+			%RawSienna,
+		}
+		\declaretheoremstyle[
+			headfont=\sffamily\bfseries\color{Blue}\large,
+			%RawSienna},
+			notefont=\ttfamily,
+			mdframed={style=mdredbox},
+			headpunct={\\[3pt]},
+			postheadspace={0pt},
+		]{thmredbox}
+		\mdfdefinestyle{mdgreenbox}{%
+			skipabove=8pt,
+			linewidth=2pt,
+			rightline=false,
+			leftline=true,
+			topline=false,
+			bottomline=false,
+			linecolor=ForestGreen,
+			backgroundcolor=ForestGreen!5,
+		}
+		\declaretheoremstyle[
+			headfont=\bfseries\sffamily\color{ForestGreen!70!black}\large,
+			notefont=\ttfamily,
+			bodyfont=\normalfont,
+			spaceabove=2pt,
+			spacebelow=1pt,
+			mdframed={style=mdgreenbox},
+			headpunct={ --- },
+		]{thmgreenbox}
+		
+		\mdfdefinestyle{mddefbox}{%
+			skipabove=8pt,
+			linewidth=2pt,
+			rightline=false,
+			leftline=true,
+			topline=false,
+			bottomline=false,
+			linecolor=ForestGreen!50!Red,
+			backgroundcolor=ForestGreen!2!Red!5,
+		}
+		\declaretheoremstyle[
+			headfont=\bfseries\sffamily\color{ForestGreen!70!Red}\large,
+			%notefont=\ttfamily,
+			bodyfont=\normalfont,
+			spaceabove=2pt,
+			spacebelow=1pt,
+			mdframed={style=mddefbox},
+			headpunct={ --- },
+		]{thmdefbox}
+		
+		
+		\mdfdefinestyle{mdblackbox}{%
+			skipabove=8pt,
+			linewidth=3pt,
+			rightline=false,
+			leftline=true,
+			topline=false,
+			bottomline=false,
+			linecolor=black,
+			backgroundcolor=RedViolet!5!gray!5,
+		}
+		\declaretheoremstyle[
+			headfont=\sffamily\bfseries,
+			notefont=\ttfamily,
+			bodyfont=\normalfont\small,
+			spaceabove=0pt,
+			spacebelow=0pt,
+			mdframed={style=mdblackbox}
+		]{thmblackbox}
+		\newcommand{\listhack}{$\empty$\vspace{-2em}}
+		\mdfdefinestyle{mdskybox}{%
+			skipabove=8pt,
+			linewidth=3pt,
+			rightline=false,
+			leftline=true,
+			topline=false,
+			bottomline=false,
+			linecolor=blue,
+			backgroundcolor=blue!3,
+			%RedViolet!5!gray!5,
+		}
+		\declaretheoremstyle[
+			headfont=\sffamily\bfseries\color{blue!80}\large,
+			notefont=\ttfamily,
+			bodyfont=\normalfont,
+			spaceabove=0pt,
+			spacebelow=0pt,
+			mdframed={style=mdskybox}
+		]{thmskybox}
+		%\newcommand{\listhack}{$\empty$\vspace{-2em}}		
+		\mdfdefinestyle{mdlembox}{%
+			skipabove=8pt,
+			linewidth=3pt,
+			rightline=false,
+			leftline=false,
+			topline=true,
+			bottomline=false,
+			linecolor=magenta,
+			backgroundcolor=magenta!5,
+			%RedViolet!5!gray!5,
+		}
+		\declaretheoremstyle[
+			headfont=\sffamily\bfseries\color{magenta!80!black}\large,
+			notefont=\ttfamily,
+			bodyfont=\normalfont,
+			headpunct={\\[3pt]},
+			postheadspace={0pt},			
+			%spaceabove=0pt,
+			%spacebelow=0pt,
+			mdframed={style=mdlembox}
+		]{thmlembox}
+		\mdfdefinestyle{mdgamebox}{%
+			skipabove=8pt,
+			linewidth=3pt,
+			rightline=false,
+			leftline=false,
+			topline=true,
+			bottomline=false,
+			linecolor=violet,
+			backgroundcolor=violet!5,
+			%RedViolet!5!gray!5,
+		}
+		\declaretheoremstyle[
+			headfont=\sffamily\bfseries\color{violet!80}\large,
+			notefont=\ttfamily,
+			bodyfont=\normalfont,
+			spaceabove=0pt,
+			spacebelow=0pt,
+			mdframed={style=mdgamebox}
+		]{thmgamebox}
+		\mdfdefinestyle{mdpropbox}{%
+			skipabove=8pt,
+			linewidth=3pt,
+			rightline=false,
+			leftline=false,
+			topline=true,
+			bottomline=false,
+			linecolor=lime,
+			backgroundcolor=lime!5,
+			%RedViolet!5!gray!5,
+		}
+		\declaretheoremstyle[
+			headfont=\sffamily\bfseries\color{green!70!black}\large,
+			notefont=\ttfamily,
+			bodyfont=\normalfont,
+			spaceabove=0pt,
+			spacebelow=0pt,
+			headpunct={\\[3pt]},
+			postheadspace={0pt},			
+			mdframed={style=mdpropbox}
+		]{thmpropbox}
+
+		\declaretheoremstyle[
+			headfont=\sffamily\bfseries\color{black!80!blue}\large,
+			notefont=\ttfamily,
+			bodyfont=\normalfont,
+			spaceabove=10pt,
+			spacebelow=10pt,
+			headpunct={.   }%%/ / / %{\\[3pt]},
+			%postheadspace={0pt},			
+			%mdframed={style=mdpropbox}
+		]{thmprobbox}
+		
+		    \declaretheoremstyle[
+		    headfont=\bfseries\color{black!80},
+		    notebraces={[}{]},
+		    notefont=\normalfont\sffamily,
+		    headpunct={. },
+		    spaceabove=10pt,
+		    spacebelow=10pt,
+		    qed=\qedsymbol,
+		    % bodyfont=\color{solC!80!pageC},
+		    ]{solutionstyle}
+		    
+		    %%%%%for links
+		    \mdfdefinestyle{mdlinkbox}{%
+			skipabove=0pt,
+			linewidth=5pt,
+			rightline=true,
+			leftline=true,
+			topline=false,
+			bottomline=false,
+			linecolor=black,
+			backgroundcolor=black!5,
+			%RedViolet!5!gray!5,
+		}
+		\declaretheoremstyle[
+			headfont=\sffamily\bfseries\color{violet!90}\large,
+		%	notefont=\ttfamily,
+			bodyfont=\normalfont,
+		    headpunct={\\[3pt]},
+			spaceabove=0pt,
+			spacebelow=0pt,
+			mdframed={style=mdlinkbox}
+		]{thmlinkbox}
+	\fi
+	%%fakesection Theorem setup
+	\ifshuvothm
+		\theoremstyle{plain}
+		%Branching here: the option secthm changes theorems to be labelled by section
+		\ifshuvomdthm
+			\ifshuvosecthm
+				\declaretheorem[%
+				style=thmbluebox,name=Theorem,numberwithin=section]{theorem}
+			\else
+				\declaretheorem[%
+				style=thmbluebox,name=Theorem]{theorem}
+			\fi
+			\declaretheorem[style=solutionstyle, numbered=no, name=Solution]{soln}
+			\declaretheorem[style=solutionstyle, numbered=no, name=Proof]{prooof}
+			%\declaretheorem[style=thmbluebox,name=Lemma,sibling=theorem]{lemma}
+			%\declaretheorem[style=thmbluebox,name=Proposition,sibling=theorem]{proposition}
+			\declaretheorem[style=thmbluebox,name=Corollary,sibling=theorem]{corollary}
+			\declaretheorem[style=thmbluebox,name=Theorem,numbered=no]{theorem*}
+			%\declaretheorem[style=thmbluebox,name=Lemma,numbered=no]{lemma*}
+			%\declaretheorem[style=thmbluebox,name=Proposition,numbered=no]{proposition*}
+			\declaretheorem[style=thmbluebox,name=Corollary,numbered=no]{corollary*}
+			\declaretheorem[style=thmlembox,name=Lemma,sibling=theorem]{lemma}
+			\declaretheorem[style=thmlembox,name=Lemma,numbered=no]{lemma*}
+			\declaretheorem[style=thmgamebox,name=Game,sibling=theorem]{game}
+			\declaretheorem[style=thmgamebox,name=Game,numbered=no]{game*}
+			\declaretheorem[style=thmpropbox,name=Proposition,sibling=theorem]{proposition}
+			\declaretheorem[style=thmpropbox,name=Proposition,numbered=no]{proposition*}
+			\declaretheorem[style=thmprobbox,name=Problem,sibling=theorem]{problem}
+			\declaretheorem[style=thmprobbox,name=Problem,numbered=no]{problem*}	
+			%%link
+		
+			\declaretheorem[style=thmlinkbox,name=Links,numbered=no]{linkb}
+		\else
+			\ifshuvosecthm
+				\newtheorem{theorem}{Theorem}[section]
+			\else
+				\newtheorem{theorem}{Theorem}
+			\fi
+			\newtheorem{lemma}[theorem]{Lemma}
+			\newtheorem{proposition}[theorem]{Proposition}
+			\newtheorem{corollary}[theorem]{Corollary}
+			\newtheorem*{theorem*}{Theorem}
+			\newtheorem*{lemma*}{Lemma}
+			\newtheorem*{proposition*}{Proposition}
+			\newtheorem*{corollary*}{Corollary}
+		\fi
+			
+		%Def-style theorems
+		\theoremstyle{definition}
+		% This ought to be a real theorem, but would be too much italics
+		\ifshuvomdthm
+			\declaretheorem[style=thmgreenbox,name=Algorithm,sibling=theorem]{algorithm}
+			\declaretheorem[style=thmgreenbox,name=Algorithm,numbered=no]{algorithm*}
+			\declaretheorem[style=thmgreenbox,name=Claim,sibling=theorem]{claim}
+			\declaretheorem[style=thmdefbox,name=Definition,sibling=theorem]{definition}
+			\declaretheorem[style=thmdefbox,name=Definition,numbered=no]{definition*}			
+			\declaretheorem[style=thmgreenbox,name=Claim,numbered=no]{claim*}
+			%\declaretheorem[style=thmskybox,name=Problem,sibling=theorem]{problem}
+			%\declaretheorem[style=thmskybox,name=Problem,numbered=no]{problem*}	
+		\else
+			\newtheorem{algorithm}[theorem]{Algorithm}
+			\newtheorem*{algorithm*}{Algorithm}
+			\newtheorem{claim}[theorem]{Claim}
+			\newtheorem*{claim*}{Claim}
+		\fi
+		\newtheorem{conjecture}[theorem]{Conjecture}
+		%\newtheorem{definition}[theorem]{Definition}
+		\newtheorem{fact}[theorem]{Fact}
+		\newtheorem{answer}[theorem]{Answer}
+		\newtheorem{case}[theorem]{Case}
+		\newtheorem{ques}[theorem]{Question}
+		\newtheorem{exercise}[theorem]{Exercise}
+		%\newtheorem{problem}[theorem]{\color{black!80!blue}\sffamily\bfseries\large Problem}
+		\newtheorem*{conjecture*}{Conjecture}
+		%\newtheorem*{definition*}{Definition}
+		\newtheorem*{fact*}{Fact}
+		\newtheorem*{answer*}{Answer}
+		\newtheorem*{case*}{Case}
+		\newtheorem*{joke*}{Joke}
+		\newtheorem*{ques*}{Question}
+		\newtheorem*{exercise*}{Exercise}
+		%\newtheorem*{problem*}{\color{black!80!blue}\sffamily\bfseries\large Problem}
+		\ifshuvomdthm
+			\declaretheorem[style=thmredbox,name=Example,sibling=theorem]{example}
+			\declaretheorem[style=thmredbox,name=Example,numbered=no]{example*}
+		\else
+			\newtheorem{example}[theorem]{Example}
+			\newtheorem*{example*}{Example}
+		\fi
+		% Remark-style theorems
+		%\theoremstyle{remark}
+		\ifshuvomdthm
+			\declaretheorem[style=thmblackbox,name=Remark,sibling=theorem]{remark}
+			\declaretheorem[style=thmblackbox,name=Remark,numbered=no]{remark*}		
+		\else
+			\newtheorem{remark}[theorem]{Remark}
+			\newtheorem*{remark*}{Remark}
+		\fi
+		\newtheorem{note}[theorem]{Note}
+		\newtheorem*{note*}{Note}
+		\newtheorem{abuse}[theorem]{Abuse of Notation}
+		\newtheorem*{abuse*}{Abuse of Notation}
+	\fi
+	%%fakesection Fancy section and chapter heads
+	\ifshuvocolorsec
+		\@ifundefined{KOMAClassName}{}{
+			\@ifundefined{chapter}{}{
+				\addtokomafont{partprefix}{\sffamily}%\bfseries}%{\rmfamily}
+				\renewcommand*{\partformat}{\color{blue}
+					\scalebox{2.5}{\thepart}\enlargethispage{2em}}
+				\addtokomafont{chapterprefix}{\raggedleft}
+				\RedeclareSectionCommand[beforeskip=0.5em]{chapter}
+				\renewcommand*{\chapterformat}{\mbox{%
+					\scalebox{1.5}{\chapappifchapterprefix{\nobreakspace}}%
+					\scalebox{2.718}{\color{blue}\maltese\thechapter}\enskip}}
+			}
+			\renewcommand*{\sectionformat}%
+				{\color{blue}\S\thesection\enskip}
+			\renewcommand*{\subsectionformat}%
+				{\color{blue}\S\thesubsection\enskip}
+			\renewcommand*{\subsubsectionformat}%
+				{\color{blue}\S\thesubsubsection\enskip}
+			\KOMAoptions{numbers=noenddot}
+			\usepackage[tocindentauto]{tocstyle}
+			\usetocstyle{KOMAlike}
+		}
+	\fi
+	%%fakesection Loads a bunch of useful packages (but allow disabling)
+	\ifshuvopkg
+		\IfFileExists{von.sty}{\usepackage{von}}{}
+		\usepackage{listings}
+		\usepackage{mathrsfs}
+		\usepackage{textcomp}
+		\lstset{basicstyle=\footnotesize\ttfamily,
+			numbers=left,
+			numbersep=5pt,
+			numberstyle=\tiny,
+			keywordstyle=\bfseries,
+			% title=\lstname,
+			showstringspaces=false,
+			tabsize=4,
+			frame=single,
+			keywordstyle=\bfseries\color{blue},
+			commentstyle=\color{green!70!black},
+			identifierstyle=\color{green!20!black},
+			stringstyle=\color{orange},
+			breaklines=true,
+			breakatwhitespace=true,
+			frame=none
+		}
+		\usepackage[shortlabels]{enumitem}
+		% a list I like for walkthrough's --- Drew-style parts
+		\newlist{walk}{enumerate}{3}
+		\setlist[walk]{label=\bfseries (\alph*)}
+		\usepackage[obeyFinal,textsize=scriptsize,shadow]{todonotes}
+		\usepackage{textcomp}
+		\usepackage{multirow}
+		% Tiny tiny optimizations:
+		\usepackage{mathtools}
+		\usepackage{microtype}
+	\fi
+	%%fakesection \maketitle configuration
+	\@ifundefined{KOMAClassName}%
+		{} % do nothing outside KOMA class
+		{% If KOMA exists. . .
+		\addtokomafont{subtitle}{\Large}
+		\setkomafont{author}{\Large\scshape}
+		\setkomafont{date}{\Large\normalsize}
+		}
+	\providecommand{\thetitle}{\@title}
+	\providecommand{\theauthor}{\@author}
+	\providecommand{\thedate}{\@date}
+	%%fakesection Commutative diagrams support
+	\ifshuvodiagrams
+		\usepackage{tikz-cd}
+		\usetikzlibrary{decorations.pathmorphing}
+	\fi
+	%%fakesection Page Setup
+	\ifshuvofancy
+		\@ifundefined{KOMAClassName}
+		{
+			\usepackage{fancyhdr}
+			\setlength{\headheight}{0.75in}
+			\setlength{\oddsidemargin}{0in}
+			\setlength{\evensidemargin}{0in}
+			\setlength{\voffset}{-1.0in}
+			\setlength{\headsep}{10pt}
+			\setlength{\textwidth}{6.5in}
+			\setlength{\headwidth}{6.5in}
+			\setlength{\textheight}{8.75in}
+			\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+			\setlength{\footskip}{0.3in}
+			\ifshuvohdr
+				\renewcommand{\headrulewidth}{0.5pt}
+				\renewcommand{\footrulewidth}{0.0pt}
+				\pagestyle{fancy}
+				\lhead{Shadmman Shahriyar Shuvo}
+				\chead{}
+				\rhead{\nouppercase{\leftmark}}
+				%\lfoot{}
+				%\cfoot{\textbf{\thepage}}
+				%\rfoot{}
+			\fi
+		}
+		{
+			\usepackage[headsepline]{scrlayer-scrpage}
+			\renewcommand{\headfont}{}
+			\addtolength{\textheight}{3.14cm}
+			\setlength{\footskip}{0.5in}
+			\setlength{\headsep}{10pt}
+			%\ihead{\footnotesize\sffamily\textbf{\theauthor} }%(\thedate)}
+			\ihead{\footnotesize \pagemark}
+			\automark{section}
+			\chead{}
+			\ohead{\footnotesize \thetitle}
+			%\ohead{\footnotesize\sffamily\textbf{\thetitle}}
+			\cfoot{}
+			%\cfoot{\textbf{\pagemark}}
+		}
+	\fi
+	%%fakesection Chinese support
+	\ifshuvochinese
+		\usepackage[encapsulated]{CJK}
+		\usepackage{ucs}
+		\usepackage[utf8x]{inputenc}
+		\newenvironment{bsmi}{\begin{CJK}{UTF8}{bsmi}}{\end{CJK}}
+		\newcommand{\cn}[1]{\begin{bsmi}#1\end{bsmi}}
+		\AtBeginDocument{\begin{CJK}{UTF8}{bsmi}}
+		\AtEndDocument{\end{CJK}}
+	\fi
+	%%fakesection Hints
+	\ifshuvohints
+		\usepackage{answers}
+		\Newassociation{hint}{hintitem}{hints}
+		\renewcommand{\solutionextension}{out}
+		\Opensolutionfile{hints}
+		\newcommand{\makehints}{\Closesolutionfile{hints}\input{hints.out}} % chktex 27
+		\Newassociation{hintone}{hintiitem}{hintss}
+		\renewcommand{\solutionextension}{out}
+		\Opensolutionfile{hintss}
+		\newcommand{\makehintss}{\Closesolutionfile{hintss}\input{hintss.out}}
+	\fi
+	%%fakesection Fonts
+	\ifshuvofonts
+		\usepackage{fontspec}
+		\setromanfont{CMU Serif}
+		\setsansfont{Share}
+		\setmonofont{Share Tech Mono}
+
+		\newfontfamily\Riky      [Ligatures=TeX]	{Riky Vampdator Normal}%, Scale=MatchUppercase
+		\newfontfamily\Metal     [Ligatures=TeX]	{Metal Mania}
+	\fi
+%%%%%%%%%%%
+%  Macros for theorems...
+%%%%%%%%%%%%
+
+	\newcommand{\probb}[3]{
+		\begin{problem}[\href{#1}{#2}]
+			#3
+		\end{problem}
+	}
+
+	\newcommand{\propp}[3]{
+		\begin{proposition}[\href{#1}{#2}]
+			#3
+		\end{proposition}
+	}
+
+	\newcommand{\thm}[3]{
+		\begin{theorem}[\href{#1}{#2}]
+			#3
+		\end{theorem}
+	}
+
+	\newcommand{\lem}[3]{
+		\begin{lemma}[\href{#1}{#2}]
+			#3
+		\end{lemma}
+	}
+
+	\newcommand{\den}[3]{
+		\begin{definition}[\href{#1}{#2}]
+			#3
+		\end{definition}
+	}
+
+	\newcommand{\coro}[3]{
+		\begin{corollary}[\href{#1}{#2}]
+			#3
+		\end{corollary}
+	}
+
+	\newcommand{\gam}[3]{
+		\begin{game}[\href{#1}{#2}]
+			#3
+		\end{game}
+	}
+
+	\newcommand{\algo}[3]{
+		\begin{algorithm}[\href{#1}{#2}]
+			#3
+		\end{algorithm}
+	}
+
+	\newcommand{\clm}[2]{
+		\begin{claim}[{#1}]
+			#2
+		\end{claim}
+	}
+
+%	\newcommand{\clm*}[2]{
+%		\begin{claim*}[{#1}]
+%			#2
+%		\end{claim*}
+%	}
+
+	\newcommand{\conj}[2]{
+		\begin{conjecture}[{#1}]
+			#2
+		\end{conjecture}
+	}
+
+
+	\newcommand{\rmrk}[2]{
+		\begin{remark}[{#1}]
+			#2
+		\end{remark}
+	}
+
+%	\newcommand{\remark*}[2]{
+%		\begin{remark*}[{#1}]
+%			#2
+%		\end{remark*}
+%	}
+
+	\newcommand{\exmpl}[3]{
+		\begin{example}[\href{#1}{#2}]
+			#3
+		\end{example}
+	}
+
+	\newcommand{\nte}[2]{
+		\begin{note}[{#1}]
+			#2
+		\end{note}
+	}
+
+%	\newcommand{\note*}[2]{
+%		\begin{note*}[{#1}]
+%			#2
+%		\end{note*}
+%	}
+
+
+
+%%fakesection END MAIN SETUP
+\fi
